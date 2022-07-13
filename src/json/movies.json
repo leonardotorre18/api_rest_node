@@ -1,0 +1,201 @@
+[
+  {
+    "id": 1,
+    "title": "Un lugar en silencio",
+    "categories": [],
+    "platform": "Netflix",
+    "year": 2018,
+    "duration": "1h 30min",
+    "director": "John Krasinski",
+    "img": "/assets/img/netflix/aquietplace.jpg"
+  }, {
+    "id": 2,
+    "title": "About Time",
+    "categories": [],
+    "platform": "Netflix",
+    "year": 2013,
+    "duration": "2h 3m",
+    "director": "Richard Curtis",
+    "img": "/assets/img/netflix/abouttime.jpg"
+  },{
+    "id": 3,
+    "title": "The Adam Project",
+    "categories": [],
+    "platform": "Netflix",
+    "year": 2022,
+    "duration": "1h 46m",
+    "director": "Shawn Levy",
+    "img": "/assets/img/netflix/adamproject.jpg"
+  },{
+    "id": 4,
+    "title": "Captain Phillips",
+    "categories": [],
+    "platform": "Netflix",
+    "year": 2013,
+    "duration": "2h 14m",
+    "director": "Paul Greengrass",
+    "img": "/assets/img/netflix/capitanphillips.jpg"
+  },{
+    "id": 5,
+    "title": "Don't Look Up",
+    "categories": [],
+    "platform": "Netflix",
+    "year": 2021,
+    "duration": "2h 25m",
+    "director": "Adam McKay",
+    "img": "/assets/img/netflix/dontlookup.jpg"
+  },{
+    "id": 6,
+    "title": "Baby Driver",
+    "categories": [],
+    "platform": "Netflix",
+    "year": 2017,
+    "duration": "1h 55m",
+    "director": "Edgar Wright",
+    "img": "/assets/img/netflix/babydriver.jpg"
+  },{
+    "id": 7,
+    "title": "Everest",
+    "categories": [],
+    "platform": "Netflix",
+    "year": 2015,
+    "duration": "2h 1m",
+    "director": "Baltasar Kormákur",
+    "img": "/assets/img/netflix/everest.jpg"
+  },{
+    "id": 8,
+    "title": "Rhe Kissing Booth 3",
+    "categories": [],
+    "platform": "Netflix",
+    "year": 2021,
+    "duration": "1h 52min",
+    "director": "Vince Marcello",
+    "img": "/assets/img/netflix/kissingbooth3.jpg"
+  },{
+    "id": 9,
+    "title": "Murder Mystery",
+    "categories": [],
+    "platform": "Netflix",
+    "year": 2019,
+    "duration": "1h 37m",
+    "director": "Kyle Newacheck",
+    "img": "/assets/img/netflix/murdermystery.jpg"
+  },{
+    "id": 10,
+    "title": "Whiplash",
+    "categories": [],
+    "platform": "Netflix",
+    "year": 2014,
+    "duration": "1h 46m",
+    "director": "Damien Chazelle",
+    "img": "/assets/img/netflix/whiplash.jpg"
+  },{
+    "id": 11,
+    "title": "Tick, Tick... Boom!",
+    "categories": [],
+    "platform": "Netflix",
+    "year": 2021,
+    "duration": "1h 55m",
+    "director": "Lin-Manuel Miranda",
+    "img": "/assets/img/netflix/ticktickboom.jpg"
+  },{
+    "id": 12,
+    "title": "Scott Pilgrim vs the World",
+    "categories": [],
+    "platform": "HBO",
+    "year": 2010,
+    "duration": "1h 52m",
+    "director": "Edgard Wright",
+    "img": "/assets/img/hbo/scottpilgrim.jpg"
+  },{
+    "id": 13,
+    "title": "The Theory of Everything",
+    "categories": [],
+    "platform": "HBO",
+    "year": 2014,
+    "duration": "2h 3m",
+    "director": "James Marsh",
+    "img": "/assets/img/hbo/theoryeverything.jpg"
+  },{
+    "id": 14,
+    "title": "Your Name",
+    "categories": [],
+    "platform": "HBO",
+    "year": 2016,
+    "duration": "1h 52m",
+    "director": "Makoto Shinkai",
+    "img": "/assets/img/hbo/yourname.jpg"
+  },{
+    "id": 15,
+    "title": "The Terminal",
+    "categories": [],
+    "platform": "HBO",
+    "year": 2004,
+    "duration": "2h 8m",
+    "director": "Steven Spielberg",
+    "img": "/assets/img/hbo/terminal.jpg"
+  },{
+    "id": 16,
+    "title": "Gravity",
+    "categories": [],
+    "platform": "HBO",
+    "year": 2013,
+    "duration": "1h 31m",
+    "director": "Alfonso Cuarón",
+    "img": "/assets/img/hbo/gravity.jpg"
+  },{
+    "id": 17,
+    "title": "The Imitation Game",
+    "categories": [],
+    "platform": "HBO",
+    "year": 2014,
+    "duration": "1h 54m",
+    "director": "Morten Tyldum",
+    "img": "/assets/img/hbo/imitationgame.jpg"
+  },{
+    "id": 18,
+    "title": "Shutter Island",
+    "categories": [],
+    "platform": "HBO",
+    "year": 2010,
+    "duration": "2h 18m",
+    "director": "Martin Scorsese",
+    "img": "/assets/img/hbo/shutterisland.jpg"
+  },{
+    "id": 19,
+    "title": "Cruella",
+    "categories": [],
+    "platform": "Disney",
+    "year": 20121,
+    "duration": "2h 14m",
+    "director": "Craig Gillespie",
+    "img": "/assets/img/disney/cruella.jpg"
+  },{
+    "id": 20,
+    "title": "Inside Out",
+    "categories": [],
+    "platform": "Disney",
+    "year": 2015,
+    "duration": "1h 35m",
+    "director": "Pete Docter",
+    "img": "/assets/img/disney/insideout.jpeg"
+  },{
+    "id": 21,
+    "title": "Old Dogs",
+    "categories": [],
+    "platform": "Disney",
+    "year": 2009,
+    "duration": "1h 28m",
+    "director": "Walt Becker",
+    "img": "/assets/img/disney/olddogs.jpg"
+  },{
+    "id": 22,
+    "title": "Turning Red",
+    "categories": [],
+    "platform": "Disney",
+    "year": 2022,
+    "duration": "1h 40m",
+    "director": "Domee Shi",
+    "img": "/assets/img/disney/turningred.jpg"
+  }
+]

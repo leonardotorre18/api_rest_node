@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "Rascal Does Not Dream of Bunny Girl Senpai",
+    "categories": [],
+    "platform": "Netflix",
+    "seasons": 1,
+    "episodies": 13,
+    "img": "/assets/img/netflix/senpai.jpg"
+  },{
+    "id": 2,
+    "title": "Anne With An E",
+    "categories": [],
+    "platform": "Netflix",
+    "seasons": 3,
+    "episodies": 27,
+    "img": "/assets/img/netflix/annewithane.jpeg"
+  },{
+    "id": 3,
+    "title": "High School Musical: The Musical: The Series",
+    "categories": [],
+    "platform": "Disney",
+    "seasons": 2,
+    "episodies": 22,
+    "img": "/assets/img/disney/highschoolmusical.jpg" 
+  }
+]
