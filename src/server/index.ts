@@ -1,9 +1,15 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
+import routes from "../routes";
+import cors from 'cors';
+import path from 'path'
 
-const server: Express = express();
+const app: Express = express();
 
-server.get('/', (req: Request, res: Response) => {
-  res.json({ message: 'Application is running' })
-})
+app.use(cors());
+app.use(express.json());
+// app.use(express.urlencoded({extended: false}))
+app.use(express.static(path.join(__dirname, '../public')));
 
-export default server;
+app.use('/', routes);
+
+export default app;
