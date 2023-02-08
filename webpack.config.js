@@ -7,13 +7,13 @@ module.exports = {
   entry: path.join(__dirname, './src', 'index.ts'),
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'server.js',
+    filename: '[name].js',
     publicPath: '/'
   },
   plugins: [
     new copyWebpackPlugin({
       patterns: [
-        {from: 'src/public', to: ''}
+        {from: 'src/public', to: 'public/'}
       ]
     })
   ],

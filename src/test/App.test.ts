@@ -1,7 +1,9 @@
 import App from '../server'
 import request from 'supertest';
 
-test('Server is running', async () => {
-  const response = await request(App).get('/').send()
-  expect(response.statusCode).toBe(200)
+describe('Server is running', () => {
+  test('Music Endpoint', async () => {
+    const response = await request(App).get('/music').send()
+    expect(response.statusCode).toBe(200)
+  })
 })

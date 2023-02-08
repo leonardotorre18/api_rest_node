@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "npm run build && node dist/main.js",
     "dev": "nodemon src/index.ts",
     "build": "webpack",
-    "preview": "node dist/server.js",
+    "preview": "node dist/main.js",
     "test": "jest"
   },
   "keywords": [],
