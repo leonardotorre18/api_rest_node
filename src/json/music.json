@@ -1,8 +1,127 @@
-[
-  {
-    "id": 1,
-    "title": "House Of Memories",
-    "autor": "Panic at the Disco",
-    "filename": "panicatthedisco_houseofmemories.mp3"
-  }
-]
+[{
+  "_id": {
+    "$oid": "63e545d97c383420673552f4"
+  },
+  "title": "Mr Blue",
+  "album": "Mr Blue",
+  "duration": "3:03",
+  "path": "/assets/audio/catherinefeeny_mrblue.mp3",
+  "author": "Catherine Feeny"
+},{
+  "_id": {
+    "$oid": "63e548fa7c383420673552fa"
+  },
+  "title": "Get Lucky",
+  "album": "Get Lucky",
+  "duration": "4:06",
+  "path": "/assets/audio/daftpunk_getlucky.mp3",
+  "author": "Daft Punk"
+},{
+  "_id": {
+    "$oid": "63e549827c383420673552fc"
+  },
+  "title": "Peaches",
+  "album": "The Belt",
+  "duration": "4:47",
+  "path": "assets/audio/inthevalleybelow_peaches.mp3",
+  "author": "In The Valley Below"
+},{
+  "_id": {
+    "$oid": "63e54aa77c383420673552ff"
+  },
+  "author": "J. Cole",
+  "title": "She Knows",
+  "album": "Born Sinner",
+  "duration": "4:08",
+  "path": "assets/audio/jcole_sheknows.mp3"
+},{
+  "_id": {
+    "$oid": "63e54b2e7c38342067355300"
+  },
+  "title": "House Of Memories",
+  "album": "Death of a Bachelor",
+  "duration": "3:30",
+  "path": "/assets/audio/panicatthedisco_houseofmemories.mp3",
+  "author": "Panic At The Disco"
+},{
+  "_id": {
+    "$oid": "63e556737c38342067355301"
+  },
+  "author": "Bedroom",
+  "title": "In my Head",
+  "album": "In my Head",
+  "path": "/assets/audio/bedroom_inmyhead.mp3",
+  "duration": "6:00"
+},{
+  "_id": {
+    "$oid": "63e557047c38342067355302"
+  },
+  "path": "/assets/audio/dancroll_complimentyoursoul.mp3",
+  "album": "Sweet Disarray",
+  "author": "Dan Croll",
+  "title": "Compliment Your Soul",
+  "duration": "2:58"
+},{
+  "_id": {
+    "$oid": "63e558a87c38342067355303"
+  },
+  "title": "Goldrushed",
+  "author": "The Royal Concept",
+  "album": "Goldrushed",
+  "duration": "3:47",
+  "path": "/assets/audio/theroyalconcept_goldrushed.mp3"
+},{
+  "_id": {
+    "$oid": "63e5599b7c38342067355305"
+  },
+  "title": "Boulevard of Broken Dreams",
+  "album": "American Idiot",
+  "author": "Green Day",
+  "path": "/assets/audio/greenday _boulevardofbrokendreams.mp3",
+  "duration": "4:22"
+},{
+  "_id": {
+    "$oid": "63e55b447c38342067355306"
+  },
+  "title": "Take Me To Church",
+  "album": "Take Me To Church E.P.",
+  "author": "Hozier",
+  "duration": "4:01",
+  "path": "/assets/audio/hozier_takemetochurch.mp3"
+},{
+  "_id": {
+    "$oid": "63e55bf57c38342067355307"
+  },
+  "title": "Counting Stars",
+  "album": "Native",
+  "author": "OneRepublic",
+  "duration": "4:17",
+  "path": "/assets/audio/onerepublic_countingstars.mp3"
+},{
+  "_id": {
+    "$oid": "63e55d467c38342067355308"
+  },
+  "title": "Panic",
+  "album": "The World Won't Listen",
+  "author": "The Smiths",
+  "duration": "2:22",
+  "path": "/assets/audio/onerepublic_countingstars.mp3"
+},{
+  "_id": {
+    "$oid": "63e55de87c38342067355309"
+  },
+  "title": "Softcore",
+  "album": "The Neighbourhood",
+  "author": "The Neighbourhood",
+  "duration": "3:31",
+  "path": "/assets/audio/theneighbourhood_softcore.mp3"
+},{
+  "_id": {
+    "$oid": "63e55e8c7c3834206735530a"
+  },
+  "title": "Blinding Lights",
+  "album": "Blinding Lights",
+  "author": "The Weeknd",
+  "duration": "3:22",
+  "path": "/assets/audio/theweeknd_blindinglights.mp3"
+}]

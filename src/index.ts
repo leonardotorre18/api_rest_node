@@ -1,8 +1,13 @@
 import express from "express";
 import server from "./server"
-import path from 'path'
+import path from 'path';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const PORT: number | string = process.env.PORT || 3000
 
 server.use(express.static(path.join(__dirname, './public')));
 
-server.listen(3000, () => console.log('Server on port 3000'))
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
