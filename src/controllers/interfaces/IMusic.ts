@@ -3,5 +3,8 @@ export interface music {
   author: string,
   duration: string,
   album: string,
-  path: string
+  path: {
+    audio: string,
+    front: string
+  }
 }
