@@ -166,4 +166,16 @@
     "audio": "https://leonardoapi.onrender.com/assets/music/audio/theweeknd_blindinglights.mp3",
     "front": "https://leonardoapi.onrender.com/assets/music/img/theweeknd_blindinglights.jpg"
   }
+},{
+  "_id": {
+    "$oid": "63f446d7feccc52c021c729b"
+  },
+  "title": "Favorite Crime",
+  "album": "Sour",
+  "author": "Olivia Rodrigo",
+  "duration": "3:05",
+  "path": {
+    "audio": "https://leonardoapi.onrender.com/assets/music/audio/oliviarodrigo_favoritecrime.mp3",
+    "front": "https://leonardoapi.onrender.com/assets/music/img/oliviarodrigo_favoritecrime.jpg"
+  }
 }]
