@@ -1,0 +1,181 @@
+.cardApi {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 
+    2px 2px 8px 0 #1db954, 
+    /* 4px 4px 16px 0 #ffffff,  */
+    0px 0px 24px 2px #191414;
+
+    border-radius: 10px;
+}
+.cardApi:hover {
+  animation-name: blinkLight;
+  animation-duration: 1.3s;
+  animation-timing-function: ease-in-out;
+}
+.cardApi .cardApi__img {
+  filter: drop-shadow(0 0 10px #1db91d);
+  width: 80%;
+  padding: 10px;
+}
+.cardApi:hover .cardApi__img {
+  animation-name: blinkLightLogo;
+  animation-duration: 1.3s;
+  animation-timing-function: ease-in-out;
+}
+.cardApi__img img {
+  width: 100%;
+  object-fit: cover;
+}
+.cardApi:hover .cardApi__img img {
+  animation-name: blinkLogo;
+  animation-duration: 1.3s;
+  animation-timing-function: ease-in-out;
+}
+
+.cardApi--process {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem;
+  opacity: .1;
+  pointer-events: none;
+}
+.cardApi--process .cardApi__img {
+  width: 80%;
+  padding: 10px; 
+}
+.cardApi--process .cardApi__img img {
+  width: 100%;
+  object-fit: cover;
+}
+
+@keyframes blinkLogo {
+  0% {
+    opacity: 1;
+  }
+  30% {
+    opacity: .2;
+  }
+  35% {
+    opacity: .2;
+  }
+  40% {
+    opacity: 1;
+  }
+  45% {
+    opacity: .2;
+  }
+  50% {
+    opacity: 1;
+  }
+  55% {
+    opacity: .2;
+  }
+  60% {
+    opacity: 1;
+  }
+  65% {
+    opacity: .2;
+  }
+  70%{
+    opacity: .2;
+  }
+  100% {
+    opacity: 1;
+  }
+
+}
+
+@keyframes blinkLight {
+  0% {
+    box-shadow: none;
+  }
+  30% {
+    box-shadow: 
+    2px 2px 8px 0 #1db954, 
+    /* 4px 4px 16px 0 #ffffff,  */
+    0px 0px 24px 2px #191414;
+  }
+  35% {
+    box-shadow: none;
+  }
+  40% {
+    box-shadow: 
+    2px 2px 8px 0 #1db954, 
+    /* 4px 4px 16px 0 #ffffff,  */
+    0px 0px 24px 2px #191414;
+  }
+  45% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 
+    2px 2px 8px 0 #1db954, 
+    /* 4px 4px 16px 0 #ffffff,  */
+    0px 0px 24px 2px #191414;
+  }
+  55% {
+    box-shadow: none;
+  }
+  60% {
+    box-shadow: 
+    2px 2px 8px 0 #1db954, 
+    /* 4px 4px 16px 0 #ffffff,  */
+    0px 0px 24px 2px #191414;
+  }
+  65% {
+    
+    box-shadow: none;
+  }
+  70%{
+    box-shadow: none;
+  }
+  100% {
+    
+    box-shadow: 
+    2px 2px 8px 0 #1db954, 
+    /* 4px 4px 16px 0 #ffffff,  */
+    0px 0px 24px 2px #191414;
+  }
+
+}
+@keyframes blinkLightLogo {
+  0% {
+    filter: drop-shadow(0 0 10px #1db91d);
+  }
+  30% {
+    filter: drop-shadow(0 0 10px #1db91d00);
+  }
+  35% {
+    filter: drop-shadow(0 0 10px #1db91d00);
+  }
+  40% {
+    filter: drop-shadow(0 0 10px #1db91d);
+  }
+  45% {
+    filter: drop-shadow(0 0 10px #1db91d00);
+  }
+  50% {
+    filter: drop-shadow(0 0 10px #1db91d);
+  }
+  55% {
+    filter: drop-shadow(0 0 10px #1db91d00);
+  }
+  60% {
+    filter: drop-shadow(0 0 10px #1db91d);
+  }
+  65% {
+    filter: drop-shadow(0 0 10px #1db91d00);
+  }
+  70%{
+    filter: drop-shadow(0 0 10px #1db91d00);
+  }
+  100% {
+    filter: drop-shadow(0 0 10px #1db91d);
+  }
+}

@@ -4,9 +4,86 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@300;400&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="/atropos/atropos.min.js"></script>
+  <link rel="stylesheet" href="/atropos/atropos.min.css">
+
+
+  <link rel="stylesheet" href="/style.css">
+  
   <title>LeonardoApi</title>
 </head>
-<body>
-  Application with TypeScript + Express
+<body class="text-white">
+  <div class="-z-50 bg-gradient-to-br from-slate-900 to-slate-800 fixed top-0 left-0 w-full h-screen"></div>
+  <header>
+    <nav class="py-2 px-5 bg-slate-800">
+      <span class="text-white font-['handjet'] text-2xl">LeonardoApi</span>  
+    </nav>
+  </header>
+  
+  <main>
+    <section class="p-4 flex flex-col gap-3 items-center">
+      <p>API Rest para uso didáctico</p>
+      
+      <p class="flex items-center gap-4">
+        Código en 
+        <a 
+          href="https://github.com/leonardotorre18/api_rest_node"
+          target="_blank"
+          class="flex items-center gap-1 bg-neutral-800 px-4 py-1 rounded-lg"
+        >
+          <img src="/github.svg">
+          Github
+
+        </a>
+      </p>
+    </section>
+
+    <section class="py-4 px-10 flex gap-8 flex-wrap justify-center">
+      <a 
+        class="cardApi"
+        href="https://leonardoapi.onrender.com/music"
+        target="_blank"
+      >
+        <div class="cardApi__img">
+          <img src="/spotify.svg" alt="">
+        </div>
+        <p class="cardApi__text">Música</p>
+      </a>
+
+      <div class="cardApi--process">
+        <div class="cardApi__img">
+          <img src="/movies.svg" alt="">
+        </div>
+        <p class="cardApi__text">Películas</p>
+      </div>
+
+      <div class="cardApi--process">
+        <div class="cardApi__img">
+          <img src="/post.svg" alt="">
+        </div>
+        <p class="cardApi__text">Publicaciones</p>
+      </div>
+
+      <div class="cardApi--process">
+        <div class="cardApi__img">
+          <img src="/album.svg" alt="">
+        </div>
+        <p class="cardApi__text">ÁLbumes</p>
+      </div>
+
+    </section>
+
+
+
+    
+  </main>
+  <script src="/script.js"></script>
 </body>
 </html>
