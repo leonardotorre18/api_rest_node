@@ -11,79 +11,99 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <script src="/atropos/atropos.min.js"></script>
-  <link rel="stylesheet" href="/atropos/atropos.min.css">
-
-
   <link rel="stylesheet" href="/style.css">
   
   <title>LeonardoApi</title>
 </head>
-<body class="text-white">
-  <div class="-z-50 bg-gradient-to-br from-slate-900 to-slate-800 fixed top-0 left-0 w-full h-screen"></div>
-  <header>
-    <nav class="py-2 px-5 bg-slate-800">
-      <span class="text-white font-['handjet'] text-2xl">LeonardoApi</span>  
+<body class="text-[#1F1E1E] font-['roboto'] bg-[#EBEBEB] ">
+
+  <header class="px-4">
+    <nav class="flex justify-between items-center max-w-7xl mx-auto py-4">
+      <span class="text-xl font-bold">LeonardoApi</span>
+       
+      <ul class="flex gap-8 items-center">
+        <li class="cursor-pointer">Docs</li>  
+        <li>
+          <button class="bg-[#007EA7] text-[#EBEBEB] py-2 px-7 rounded-lg hover:bg-[#00000000] hover:text-[#1F1E1E] hover:ring hover:ring-[#007EA7] font-bold">
+            Github
+          </button>
+        </li>
+      </ul>
     </nav>
   </header>
-  
-  <main>
-    <section class="p-4 flex flex-col gap-3 items-center">
-      <p>API Rest para uso didáctico</p>
-      
-      <p class="flex items-center gap-4">
-        Código en 
-        <a 
-          href="https://github.com/leonardotorre18/api_rest_node"
-          target="_blank"
-          class="flex items-center gap-1 bg-neutral-800 px-4 py-1 rounded-lg"
-        >
-          <img src="/github.svg">
-          Github
 
-        </a>
-      </p>
+  <main class="max-w-5xl mx-auto px-8">
+
+    <!-- Jumbotron -->
+
+    <section class="mt-12 mb-6">
+      <h1 class="text-4xl mb-4">Leonardo 
+        <span class="text-[#007EA7]">{</span>
+           Api 
+        <span class="text-[#007EA7]">}</span>
+      </h1>
+      <p>Api creada con NodeJS + Express + Typescript</p>
+      <p>Creada con fines didácticos para estudiantes del Instituto  Alfa Carabobo</p>
     </section>
 
-    <section class="py-4 px-10 flex gap-8 flex-wrap justify-center">
-      <a 
-        class="cardApi"
-        href="https://leonardoapi.onrender.com/music"
-        target="_blank"
-      >
-        <div class="cardApi__img">
-          <img src="/spotify.svg" alt="">
-        </div>
-        <p class="cardApi__text">Música</p>
-      </a>
+    <!-- Endpoints Container -->
 
-      <div class="cardApi--process">
-        <div class="cardApi__img">
-          <img src="/movies.svg" alt="">
+    <section>
+
+      <div class="bg-[#DDE1EB] pt-5 pb-6 px-4 rounded-lg shadow shadow-lg mb-5">
+        <div class="flex justify-between items-center mb-3">
+          <div class="flex items-center gap-4">
+            <div class="w-7">
+              <img src="/music.svg" alt="">
+            </div>
+            <p class="font-bold">Música</p>
+          </div>
+          <a class="w-7" href="https://leonardoapi.onrender.com/music" target="_blank">
+            <img src="/open.svg" alt="">
+          </a>
+
         </div>
-        <p class="cardApi__text">Películas</p>
+        <div class="bg-[#737373] text-[#EBEBEB] py-2 px-7 rounded-lg font-mono">https://leonardoapi.onreder.com/music</div>
       </div>
 
-      <div class="cardApi--process">
-        <div class="cardApi__img">
-          <img src="/post.svg" alt="">
+      <div class="bg-[#DDE1EB] pt-5 pb-6 px-4 rounded-lg shadow shadow-lg mb-5 pointer-events-none opacity-30">
+        <div class="flex justify-between items-center mb-3">
+          <div class="flex items-center gap-4">
+            <div class="w-7">
+              <img src="/movies.svg" alt="">
+            </div>
+            <p class="font-bold">Películas</p>
+          </div>
+          <a class="w-7" href="https://leonardoapi.onrender.com/movies" target="_blank">
+            <img src="/open.svg" alt="">
+          </a>
+
         </div>
-        <p class="cardApi__text">Publicaciones</p>
+        <div class="bg-[#737373] text-[#EBEBEB] py-2 px-7 rounded-lg font-mono">https://leonardoapi.onreder.com/movies</div>
       </div>
 
-      <div class="cardApi--process">
-        <div class="cardApi__img">
-          <img src="/album.svg" alt="">
+      <div class="bg-[#DDE1EB] pt-5 pb-6 px-4 rounded-lg shadow shadow-lg mb-5 pointer-events-none opacity-30">
+        <div class="flex justify-between items-center mb-3">
+          <div class="flex items-center gap-4">
+            <div class="w-7">
+              <img src="/album.svg" alt="">
+            </div>
+            <p class="font-bold">Fotos</p>
+          </div>
+          <a class="w-7" href="https://leonardoapi.onrender.com/album" target="_blank">
+            <img src="/open.svg" alt="">
+          </a>
+
         </div>
-        <p class="cardApi__text">ÁLbumes</p>
+        <div class="bg-[#737373] text-[#EBEBEB] py-2 px-7 rounded-lg font-mono">https://leonardoapi.onreder.com/album</div>
       </div>
+
 
     </section>
 
-
-
-    
   </main>
+
+
   <script src="/script.js"></script>
 </body>
 </html>
