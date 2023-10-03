@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import musicController from "../controllers/music.controller";
+import musicController from "../controllers/MusicController";
 
 const router: Router = express.Router()
 const controller: any = new musicController()
