@@ -9,14 +9,21 @@ router.get('/users', async (req: Request, res: Response) => {
   const response = await controller.getUsers();
   res.json(response)
 })
-router.post('/signin', (req: Request, res: Response) => {
+router.post('/register', async (req: Request, res: Response) => {
   let { email, password }: { email: string, password: string } = req?.body
-  email = email.toLowerCase();
-
-  controller.addUser({email, password})
-
-  res.json({ realizado: ''})
+  const response = await controller.addUser({email, password})
+  res.json(response)
 })
+router.delete('/delete', async (req: Request, res: Response) => {
+  let { id }: { id: string } = req?.body
+  const response = await controller.deleteUser(id)
+  res.json(response)
+})
+// router.post('/signin', async (req: Request, res: Response) => {
+//   let { email, password }: { email: string, password: string } = req?.body
+//   const response = await controller.addUser({email, password})
+//   res.json(response)
+// })
 
 
 
