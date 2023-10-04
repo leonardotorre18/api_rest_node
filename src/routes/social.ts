@@ -19,11 +19,11 @@ router.delete('/delete', async (req: Request, res: Response) => {
   const response = await controller.deleteUser(id)
   res.json(response)
 })
-// router.post('/signin', async (req: Request, res: Response) => {
-//   let { email, password }: { email: string, password: string } = req?.body
-//   const response = await controller.addUser({email, password})
-//   res.json(response)
-// })
+router.post('/login', async (req: Request, res: Response) => {
+  let { email, password }: { email: string, password: string } = req?.body
+  const response = await controller.login({email, password})
+  res.json(response)
+})
 
 
 
