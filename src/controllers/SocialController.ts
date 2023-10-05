@@ -4,6 +4,13 @@ import { addPost, deletePost, getPosts } from "../models/orm/PostOrm";
 import { addUser, deleteUser, getUserByEmail, getUserById, getUsers } from "../models/orm/UserOrm";
 import { ResponseServer } from "./types";
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv';
+
+
+dotenv.config();
+
+const secret = process.env.SECRET_KEY_TOKEN || '';
 
 export default class SocialController {
 
@@ -38,7 +45,7 @@ export default class SocialController {
       : { message: 'Id invalid' }
   }
 
-  public async login (user: IAuth): Promise<ResponseServer> {
+  public async login (user: IAuth): Promise<ResponseServer | { message:string, token:string }> {
 
     let { email, password } = user;
     if(!email && !password) return { message: 'Invalid Data'}
@@ -48,8 +55,14 @@ export default class SocialController {
     const validationEmail = await getUserByEmail(email)
     if (!validationEmail) return { message: 'Invalid Email' }
 
+    
+
+    const token = jwt.sign({ email }, secret, {
+      expiresIn: "2h" 
+  });
+
     return bcrypt.compareSync(password, validationEmail.password) ?
-      { message: 'Authentication Success' }
+      { message: 'Authentication Success', token: token }
       : { message: 'Invalid Password'}
   }
 
