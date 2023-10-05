@@ -1,5 +1,7 @@
-import { IUser } from "../models/interfaces/IUser";
-import { addUser, deleteUser, getUserByEmail, getUsers } from "../models/orm/UserOrm";
+import mongoose from "mongoose";
+import { IAuth, IPost, IUser } from "../models/interfaces/IUser";
+import { addPost, deletePost, getPosts } from "../models/orm/PostOrm";
+import { addUser, deleteUser, getUserByEmail, getUserById, getUsers } from "../models/orm/UserOrm";
 import { ResponseServer } from "./types";
 import bcrypt from 'bcrypt';
 
@@ -13,7 +15,7 @@ export default class SocialController {
     }
   }
 
-  public async addUser (newUser: IUser): Promise<ResponseServer> {
+  public async register (newUser: IUser): Promise<ResponseServer> {
     let response: ResponseServer = { message: '' }
 
     if (newUser.email) newUser.email = newUser.email.toLowerCase()
@@ -29,24 +31,54 @@ export default class SocialController {
   }
 
   public async deleteUser (id: string): Promise<ResponseServer> {
+    if(!mongoose.Types.ObjectId.isValid(id)) return { message: 'Id invalid' }
     const response = await deleteUser(id)
     return response ? 
       { message: 'User Deleted' }
       : { message: 'Id invalid' }
   }
 
-  public async login (user: IUser): Promise<ResponseServer> {
-    if (user.email) user.email = user.email.toLowerCase()
+  public async login (user: IAuth): Promise<ResponseServer> {
 
-    const response = await getUserByEmail(user.email)
+    let { email, password } = user;
+    if(!email && !password) return { message: 'Invalid Data'}
 
-    if (!response) return { message: 'Invalid Email' }
+    email = email.toLowerCase();
 
-    if (user.password && response?.password) 
-      if (bcrypt.compareSync(user.password, response.password))
-        return { message: 'Authentication Success' }
-      
-    return { message: 'Invalid Password'}
+    const validationEmail = await getUserByEmail(email)
+    if (!validationEmail) return { message: 'Invalid Email' }
+
+    return bcrypt.compareSync(password, validationEmail.password) ?
+      { message: 'Authentication Success' }
+      : { message: 'Invalid Password'}
   }
 
+  public async getPosts (): Promise<IPost[] | ResponseServer> {
+    try {
+      return await getPosts()
+    } catch(err) {
+      return { message: 'Error in Server' }
+    }
+  }
+
+  public async addPost ({ id, body }: { id: string, body: string }): Promise<ResponseServer> {
+
+    
+    if(!body || !mongoose.Types.ObjectId.isValid(id)) return { message: 'Incompleted Data'}
+
+    const user = await getUserById(id)
+    if(!user) return { message: 'User not Found'}
+
+    await addPost({ user_id: {_id: id}, body })
+    
+    return { message: 'Post Added'}
+  }
+
+  public async deletePost (id: string): Promise<ResponseServer> {
+    if(!mongoose.Types.ObjectId.isValid(id)) return { message: 'Id invalid' }
+    const response = await deletePost(id)
+    return response ? 
+      { message: 'User Deleted' }
+      : { message: 'Id invalid' }
+  }
 }
