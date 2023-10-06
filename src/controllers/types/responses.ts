@@ -10,6 +10,15 @@ export const usersResponse = (users: IUser[]): TUsersResponse => ({
   users
 })
 
+export type TUserResponse = {
+  status: 200,
+  user: IUser
+}
+export const userResponse = (user: IUser): TUserResponse => ({
+  status: 200,
+  user
+})
+
 export type TLoginResponse = {
   status: 200,
   token: string,

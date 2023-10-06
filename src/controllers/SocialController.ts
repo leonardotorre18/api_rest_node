@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
-import { IPost, IUser } from "../models/interfaces/IUser";
+import {  IUser } from "../models/interfaces/IUser";
 import { addPost, deletePost, getPosts } from "../models/orm/PostOrm";
 import { addUser, deleteUser, getUserByEmail, getUserById, getUsers } from "../models/orm/UserOrm";
 import { TServerResponse } from "./types";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv';
-import { badRequestResponse, customErrorResponse, customResponse, internalServerErrorResponse, loginResponse, postsResponse, usersResponse } from "./types/responses";
+import { badRequestResponse, customErrorResponse, customResponse, internalServerErrorResponse, loginResponse, postsResponse, userResponse, usersResponse } from "./types/responses";
 
 
 dotenv.config();
@@ -59,6 +59,15 @@ export default class SocialController {
     return response ? 
       customResponse('User deleted')
       : badRequestResponse()
+  }
+
+  public async getUserById (id: string): Promise<TServerResponse> {
+    if(!mongoose.Types.ObjectId.isValid(id)) return badRequestResponse()
+    const user = await getUserById(id)
+    return user ?
+      userResponse(user)
+      : badRequestResponse()
+
   }
 
   public async getPosts (): Promise<TServerResponse> {

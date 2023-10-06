@@ -22,13 +22,12 @@ router.post('/login', async (req: Request, res: Response) => {
 
   res.status(response.status).json(response)
 })
-// Deber redireccionar al login luego del registro
 router.post('/register', async (req: Request, res: Response) => {
   let email = req?.body?.email;
   let password = req?.body?.password;
 
   const response = await controller.register({email, password })
-  res.json(response)
+  res.status(response.status).json(response)
 })
 
 
@@ -37,18 +36,21 @@ router.get('/users', verifyToken, async (req: Request, res: Response) => {
   const response = await controller.getUsers();
   res.status(response.status).json(response)
 })
-// Debe recibir tambien la password
+router.get('/users/id/:id_user', verifyToken, async (req: Request, res: Response) => {
+  const id = req.params?.id_user;
+  const response = await controller.getUserById(id)
+  res.status(response.status).json(response)
+})
 router.delete('/users/delete', verifyToken, async (req: Request, res: Response) => {
   let { id }: { id: string } = req?.body
   const response = await controller.deleteUser(id)
-  res.json(response)
+  res.status(response.status).json(response)
 })
-// Ruta para información personal por id
 
 
 router.get('/post', verifyToken, async (req: Request, res: Response) => {
   const response = await controller.getPosts();
-  res.json(response)
+  res.status(response.status).json(response)
 })
 router.post('/post/add', verifyToken, async (req: Request, res: Response) => {
   let id = req?.body?.id;
@@ -57,13 +59,11 @@ router.post('/post/add', verifyToken, async (req: Request, res: Response) => {
   const response = await controller.addPost({id, body})
   res.status(response.status).json(response)
 })
-// Debe recibir el id y el token
 router.delete('/post/delete', verifyToken, async (req: Request, res: Response) => {
   const { id } = req?.body;
   const response = await controller.deletePost(id)
-  res.json(response)
+  res.status(response.status).json(response)
 })
-
 // Falta ruta para encontrar post de usuarios
 
 export default router
