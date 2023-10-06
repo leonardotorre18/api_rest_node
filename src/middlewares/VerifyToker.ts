@@ -22,7 +22,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
 
     // Verify if jwt is present
     if(!token){
-        return res.status(403).send({
+        return res.status(400).send({
             authenticationError: 'Missing JWT in request',
             message: 'Not authorised to consume this endpoint'
         });
@@ -32,7 +32,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     jwt.verify(token, secret, (err: any, decoded: any) => {
 
         if(err){
-            return res.status(500).send({
+            return res.status(403).send({
                 authenticationError: 'JWT verification failed',
                 message: 'Failed to verify JWT token in request'
             });

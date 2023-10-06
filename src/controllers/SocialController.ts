@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
-import { IAuth, IPost, IUser } from "../models/interfaces/IUser";
+import { IPost, IUser } from "../models/interfaces/IUser";
 import { addPost, deletePost, getPosts } from "../models/orm/PostOrm";
 import { addUser, deleteUser, getUserByEmail, getUserById, getUsers } from "../models/orm/UserOrm";
-import { ResponseServer } from "./types";
+import { TServerResponse } from "./types";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv';
+import { badRequestResponse, customErrorResponse, customResponse, internalServerErrorResponse, loginResponse, postsResponse, usersResponse } from "./types/responses";
 
 
 dotenv.config();
@@ -14,84 +15,80 @@ const secret = process.env.SECRET_KEY_TOKEN || '';
 
 export default class SocialController {
 
-  public async getUsers (): Promise<IUser[] | ResponseServer> {
+  public async login (email: string, password: string): Promise<TServerResponse> {
+
+    email = email.toLowerCase();
+    const userByEmail = await getUserByEmail(email)
+    if (!userByEmail) return badRequestResponse()
+
+    if ( ! bcrypt.compareSync(password, userByEmail.password)) 
+      return customErrorResponse('Password Invalid')
+    const token = jwt.sign({ email }, secret, {
+      expiresIn: "2h" 
+    });
+
+    return loginResponse(token, userByEmail)
+  }
+
+  public async getUsers (): Promise<TServerResponse> {
     try {
-      return await getUsers()
+      const users = await getUsers()
+      return usersResponse(users)
     } catch(err) {
-      return { message: 'Error in Server' }
+      return internalServerErrorResponse()
     }
   }
 
-  public async register (newUser: IUser): Promise<ResponseServer> {
-    let response: ResponseServer = { message: '' }
+  public async register (newUser: IUser): Promise<TServerResponse> {
 
     if (newUser.email) newUser.email = newUser.email.toLowerCase()
     if(newUser.password) newUser.password = bcrypt.hashSync(newUser.password, 8)
     
     const userRegister = await getUserByEmail(newUser.email)
-    if (userRegister) return { message: 'This Email is in used' }
+    if (userRegister) return customResponse('This Email is in used')
     
     await addUser(newUser)
-      .then((user: IUser) => response.message = `${user.email} Success Register`)
-      .catch((err) => response.message = err.message)
-    return response
+
+
+    return customResponse(`${newUser.email} Success Register`)
   }
 
-  public async deleteUser (id: string): Promise<ResponseServer> {
-    if(!mongoose.Types.ObjectId.isValid(id)) return { message: 'Id invalid' }
+  public async deleteUser (id: string): Promise<TServerResponse> {
+    if(!mongoose.Types.ObjectId.isValid(id)) return badRequestResponse()
     const response = await deleteUser(id)
     return response ? 
-      { message: 'User Deleted' }
-      : { message: 'Id invalid' }
+      customResponse('User deleted')
+      : badRequestResponse()
   }
 
-  public async login (user: IAuth): Promise<ResponseServer | { message:string, token:string }> {
-
-    let { email, password } = user;
-    if(!email && !password) return { message: 'Invalid Data'}
-
-    email = email.toLowerCase();
-
-    const validationEmail = await getUserByEmail(email)
-    if (!validationEmail) return { message: 'Invalid Email' }
-
-    
-
-    const token = jwt.sign({ email }, secret, {
-      expiresIn: "2h" 
-  });
-
-    return bcrypt.compareSync(password, validationEmail.password) ?
-      { message: 'Authentication Success', token: token }
-      : { message: 'Invalid Password'}
-  }
-
-  public async getPosts (): Promise<IPost[] | ResponseServer> {
+  public async getPosts (): Promise<TServerResponse> {
     try {
-      return await getPosts()
+      const posts = await getPosts()
+      return postsResponse(posts)
     } catch(err) {
-      return { message: 'Error in Server' }
+      return internalServerErrorResponse()
     }
   }
 
-  public async addPost ({ id, body }: { id: string, body: string }): Promise<ResponseServer> {
+  public async addPost ({ id, body }: { id: string, body: string }): Promise<TServerResponse> {
 
     
-    if(!body || !mongoose.Types.ObjectId.isValid(id)) return { message: 'Incompleted Data'}
+    if(!body || !mongoose.Types.ObjectId.isValid(id)) return badRequestResponse()
 
     const user = await getUserById(id)
-    if(!user) return { message: 'User not Found'}
+    if(!user) return badRequestResponse()
 
     await addPost({ user_id: {_id: id}, body })
     
-    return { message: 'Post Added'}
+    return customResponse('Post Added')
   }
 
-  public async deletePost (id: string): Promise<ResponseServer> {
-    if(!mongoose.Types.ObjectId.isValid(id)) return { message: 'Id invalid' }
+  public async deletePost (id: string): Promise<TServerResponse> {
+    if(!mongoose.Types.ObjectId.isValid(id)) return badRequestResponse()
+
     const response = await deletePost(id)
     return response ? 
-      { message: 'User Deleted' }
-      : { message: 'Id invalid' }
+      customResponse('User Deleted')
+      : badRequestResponse()
   }
 }
