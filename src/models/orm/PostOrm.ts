@@ -1,4 +1,5 @@
 import { PostEntity } from "../entities/PostEntity"
+import { UserEntity } from "../entities/UserEntity"
 import { IPost } from "../interfaces/IUser"
 
 export const addPost = (newPost: IPost): Promise<IPost> => {
@@ -12,13 +13,23 @@ export const deletePost = async (id: string): Promise<boolean> => {
   return response.deletedCount ? true : false
 }
 
-export const getPosts = (): Promise<IPost[]> => {
+export const getPosts = async (): Promise<IPost[]> => {
   const model = PostEntity();
-  return model.find({
-    // isDeleted: false
+  UserEntity()
+
+  return model.find({})
+  .populate("user", 'name email')
+  .exec()
+  .then( (posts) => {
+    return <IPost[]>posts
   })
-    // .select('email password')
-    // .limit(Infinity)
-    .exec()
-    .then((post: IPost[]) => post)
+  
+
+  // return model.find({
+  //   // isDeleted: false
+  // })
+  //   // .select('email password')
+  //   // .limit(Infinity)
+  //   .exec()
+  //   .then((post: IPost[]) => post)
 }

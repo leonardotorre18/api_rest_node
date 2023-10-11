@@ -1,11 +1,12 @@
 export interface IUser {
+  name: string,
   email: string,
   password: string,
 }
 
 export interface IPost {
   body: string,
-  user_id: {
+  user: {
     _id: string
   }
 }

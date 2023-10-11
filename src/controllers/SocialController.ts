@@ -71,8 +71,9 @@ export default class SocialController {
   }
 
   public async getPosts (): Promise<TServerResponse> {
+    const posts = await getPosts()
+    console.log(posts)
     try {
-      const posts = await getPosts()
       return postsResponse(posts)
     } catch(err) {
       return internalServerErrorResponse()
@@ -87,7 +88,7 @@ export default class SocialController {
     const user = await getUserById(id)
     if(!user) return badRequestResponse()
 
-    await addPost({ user_id: {_id: id}, body })
+    await addPost({ user: {_id: id}, body })
     
     return customResponse('Post Added')
   }

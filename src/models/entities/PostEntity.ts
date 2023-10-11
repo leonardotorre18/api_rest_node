@@ -3,7 +3,7 @@ import { IPost } from "../interfaces/IUser"
 
 export const PostEntity = () => {
   let schema = new mongoose.Schema<IPost>({
-    user_id: { 
+    user: { 
       type: mongoose.Types.ObjectId,
       ref: 'users',
       required: true ,
