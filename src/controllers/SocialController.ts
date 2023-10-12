@@ -19,10 +19,10 @@ export default class SocialController {
 
     email = email.toLowerCase();
     const userByEmail = await getUserByEmail(email)
-    if (!userByEmail) return badRequestResponse()
+    if (!userByEmail) return customErrorResponse('El correo no es correcto')
 
     if ( ! bcrypt.compareSync(password, userByEmail.password)) 
-      return customErrorResponse('Password Invalid')
+      return customErrorResponse('La contraseña no es correcta')
     const token = jwt.sign({ email }, secret, {
       expiresIn: "2h" 
     });
@@ -36,7 +36,7 @@ export default class SocialController {
     if (newUser.password) newUser.password = bcrypt.hashSync(newUser.password, 8)
     
     const userRegister = await getUserByEmail(newUser.email)
-    if (userRegister) return customResponse('This Email is in used')
+    if (userRegister) return customErrorResponse('El correo ya se encuentra registrado')
     
     const userAdded = await addUser(newUser)
     const token = jwt.sign({ email: newUser.email }, secret, {
