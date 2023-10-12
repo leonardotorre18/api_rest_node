@@ -30,6 +30,23 @@ export default class SocialController {
     return loginResponse(token, userByEmail)
   }
 
+  public async register (newUser: IUser): Promise<TServerResponse> {
+
+    if (newUser.email) newUser.email = newUser.email.toLowerCase()
+    if (newUser.password) newUser.password = bcrypt.hashSync(newUser.password, 8)
+    
+    const userRegister = await getUserByEmail(newUser.email)
+    if (userRegister) return customResponse('This Email is in used')
+    
+    const userAdded = await addUser(newUser)
+    const token = jwt.sign({ email: newUser.email }, secret, {
+      expiresIn: "2h" 
+    });
+
+
+    return loginResponse(token, userAdded)
+  }
+
   public async getUsers (): Promise<TServerResponse> {
     try {
       const users = await getUsers()
@@ -37,20 +54,6 @@ export default class SocialController {
     } catch(err) {
       return internalServerErrorResponse()
     }
-  }
-
-  public async register (newUser: IUser): Promise<TServerResponse> {
-
-    if (newUser.email) newUser.email = newUser.email.toLowerCase()
-    if(newUser.password) newUser.password = bcrypt.hashSync(newUser.password, 8)
-    
-    const userRegister = await getUserByEmail(newUser.email)
-    if (userRegister) return customResponse('This Email is in used')
-    
-    await addUser(newUser)
-
-
-    return customResponse(`${newUser.email} Success Register`)
   }
 
   public async deleteUser (id: string): Promise<TServerResponse> {
@@ -72,7 +75,6 @@ export default class SocialController {
 
   public async getPosts (): Promise<TServerResponse> {
     const posts = await getPosts()
-    console.log(posts)
     try {
       return postsResponse(posts)
     } catch(err) {

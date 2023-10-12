@@ -4,20 +4,18 @@ import { IUser } from "../interfaces/IUser";
 
 export const getUsers = async (): Promise<IUser[]> => {
   const model = UserEntity();
-  return model.find({
-    // isDeleted: false
-  })
-    // .select('email password')
-    // .limit(Infinity)
-    .exec()
-    .then((users: IUser[]) => users)
+  return model.aggregate([
+    { $match: {} },
+    { $project: { password: 0 } }
+  ])
 }
 
 export const addUser = (newUser: IUser): Promise<IUser> => {
   const model = UserEntity();
   return model.create({
     email: newUser.email,
-    password: newUser.password
+    password: newUser.password,
+    name: newUser.name
   })
 }
 

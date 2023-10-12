@@ -18,18 +18,10 @@ export const getPosts = async (): Promise<IPost[]> => {
   UserEntity()
 
   return model.find({})
-  .populate("user", 'name email')
+  .populate("user", "name email")
   .exec()
   .then( (posts) => {
     return <IPost[]>posts
   })
   
-
-  // return model.find({
-  //   // isDeleted: false
-  // })
-  //   // .select('email password')
-  //   // .limit(Infinity)
-  //   .exec()
-  //   .then((post: IPost[]) => post)
 }

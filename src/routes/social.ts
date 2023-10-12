@@ -28,10 +28,9 @@ router.post('/register', async (req: Request, res: Response) => {
   let name = req?.body?.name;
   let response: TServerResponse;
 
-  if (email && password && name)
-
+  if (email && password && name){
     response = await controller.register({ name, email, password })
-
+  }
   else response = badRequestResponse()
   
   res.status(response.status).json(response)
