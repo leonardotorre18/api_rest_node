@@ -14,6 +14,11 @@ export const UserEntity = () => {
     password: {
       type: 'string', required: true
     },
+    token: {
+      type: 'string',
+      unique: true,
+      default: ''
+    }
   })
   return mongoose.models.users || mongoose.model<IUser>('users', schema)
 }

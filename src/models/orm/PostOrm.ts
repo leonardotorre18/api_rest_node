@@ -1,15 +1,16 @@
+import mongoose from "mongoose"
 import { PostEntity } from "../entities/PostEntity"
 import { UserEntity } from "../entities/UserEntity"
-import { IPost } from "../interfaces/IUser"
+import { IPost } from "../interfaces/IPost"
 
 export const addPost = (newPost: IPost): Promise<IPost> => {
   const model = PostEntity()
   return model.create(newPost)
 }
 
-export const deletePost = async (id: string): Promise<boolean> => {
+export const deletePost = async (id: mongoose.Types.ObjectId, token: string): Promise<boolean> => {
   const model = PostEntity()
-  const response = await model.deleteOne({ _id: id })
+  const response = await model.deleteOne({ _id: id, token })
   return response.deletedCount ? true : false
 }
 

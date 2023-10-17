@@ -1,17 +1,15 @@
+import mongoose from "mongoose"
+
 export interface IUser {
+  _id: mongoose.Types.ObjectId,
   name: string,
   email: string,
   password: string,
+  token: string
 }
 
-export interface IPost {
-  body: string,
-  user: {
-    _id: string
-  }
-}
-
-export interface IAuth {
+export interface IRegister {
+  name: string,
   email: string,
   password: string,
 }

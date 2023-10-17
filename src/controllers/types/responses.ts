@@ -1,4 +1,5 @@
-import { IPost, IUser } from "../../models/interfaces/IUser";
+import { IPost } from "../../models/interfaces/IPost";
+import { IUser} from "../../models/interfaces/IUser";
 
 
 export type TUsersResponse = {
@@ -39,47 +40,47 @@ export const postsResponse = (posts: IPost[]): TPostsResponse => ({
   posts
 })
 
-export type TCustomResponse = {
+export type TCustom200Response = {
   status: 200,
   message: string
 }
-export const customResponse = (message: string): TCustomResponse => ({
+export const custom200Response = (message: string): TCustom200Response => ({
   status: 200,
   message
 })
 
-export type TCustomErrorResponse = {
-  status: 400,
+export type TCustom403Response = {
+  status: 403,
   message: string
 }
-export const customErrorResponse = (message: string): TCustomErrorResponse => ({
-  status: 400,
+export const custom403Response = (message: string): TCustom403Response => ({
+  status: 403,
   message
 })
 
-export type TBadRequestResponse = {
-  status: 400,
+export type T403Response = {
+  status: 403,
   message: string
 }
-export const badRequestResponse = (): TBadRequestResponse => ({
-  status: 400,
-  message: 'Bad Request'
+export const forbiddenResponse = (): T403Response => ({
+  status: 403,
+  message: 'Los parámetros enviados son incorrectos'
 })
 
-export type TUnauthorizedResponse = {
+export type T401Response = {
   status: 401,
   message: string
 }
-export const unauthorizedResponse = (): TUnauthorizedResponse => ({
+export const unauthorizedResponse = (): T401Response => ({
   status: 401,
   message: 'Unauthorized'
 })
 
-export type TInternalServerErrorResponse = {
+export type T500Response = {
   status: 500,
   message: string
 }
-export const internalServerErrorResponse = (): TInternalServerErrorResponse => ({
+export const internalServerErrorResponse = (): T500Response => ({
   status: 500,
   message: 'Internal Server Error'
 })

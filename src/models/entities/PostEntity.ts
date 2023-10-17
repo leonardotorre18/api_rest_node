@@ -1,10 +1,10 @@
 import mongoose from "mongoose"
-import { IPost } from "../interfaces/IUser"
+import { IPost } from "../interfaces/IPost"
 
 export const PostEntity = () => {
   let schema = new mongoose.Schema<IPost>({
     user: { 
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'users',
       required: true ,
     },

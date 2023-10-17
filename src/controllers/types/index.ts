@@ -1,12 +1,21 @@
-import { TBadRequestResponse, TCustomResponse, TInternalServerErrorResponse, TLoginResponse, TPostsResponse, TUnauthorizedResponse, TUserResponse, TUsersResponse } from "./responses";
+import { 
+  T401Response,
+  T403Response,
+  T500Response,
+  TCustom200Response,
+  TLoginResponse,
+  TPostsResponse,
+  TUserResponse,
+  TUsersResponse
+} from "./responses";
 
 export type TServerResponse =
-  TCustomResponse |
+  TCustom200Response |
   TLoginResponse |
   TUsersResponse |
   TUserResponse |
   TPostsResponse |
-  TBadRequestResponse |
-  TUnauthorizedResponse |
-  TInternalServerErrorResponse
+  T403Response |
+  T401Response |
+  T500Response
   
