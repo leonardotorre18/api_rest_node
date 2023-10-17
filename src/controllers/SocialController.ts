@@ -25,7 +25,7 @@ import {
   userResponse, 
   usersResponse 
 } from "./types/responses";
-import { getUserByTokenAndId, loginToken, removeToken } from "../models/orm/AuthOrm";
+import { getUserByTokenAndId, loginToken, refreshSession, removeToken } from "../models/orm/AuthOrm";
 import { IPost } from "../models/interfaces/IPost";
 
 
@@ -92,6 +92,14 @@ export default class SocialController {
     const response = await removeToken(token)
     return response ? 
       custom200Response('Sesión cerrada Exitosamente')
+      : forbiddenResponse()
+  }
+
+  public async session (token: string): Promise<TServerResponse> {
+    const response = await refreshSession(token)
+    
+    return response ?
+      userResponse(response)
       : forbiddenResponse()
   }
 

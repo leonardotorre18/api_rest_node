@@ -5,6 +5,7 @@ import { TServerResponse } from "../controllers/types";
 import { forbiddenResponse, userResponse } from "../controllers/types/responses";
 import mongoose from "mongoose";
 import { getUserById } from "../models/orm/UserOrm";
+import { refreshSession } from "../models/orm/AuthOrm";
 
 const controller = new SocialController();
 
@@ -38,7 +39,6 @@ router.post('/register', async (req: Request, res: Response) => {
 })
 router.post('/logout', verifyToken, async (req: Request, res: Response) => {
   const token = req.headers["authorization"];
-  
 
   const response: TServerResponse = 
     token ?
@@ -47,6 +47,16 @@ router.post('/logout', verifyToken, async (req: Request, res: Response) => {
   
   res.status(response.status).json(response)
 
+})
+router.post('/me', verifyToken,async (req:Request, res: Response) => {
+  const token = req.headers["authorization"];
+  let response: TServerResponse
+
+  if (token) response = await controller.session(token)
+  else response = forbiddenResponse()
+  
+
+  res.status(response.status).json(response)
 })
 
 
