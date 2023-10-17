@@ -1,17 +1,35 @@
 import mongoose from "mongoose";
 import { UserEntity } from "../entities/UserEntity"
 import { IUser } from "../interfaces/IUser";
+import jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const secret = process.env.SECRET_KEY_TOKEN || '';
 
 
 export const loginToken = async ( id: mongoose.Types.ObjectId,  token: string): Promise<boolean> => {
   const model = UserEntity();
   const response = await model.updateOne({ _id: id }, {token})
-  return false
+  return response.modifiedCount ?
+    true : false
 }
 
-// export const removeToken = ( token: string): Promise<boolean> => {
+export const removeToken = async ( token: string): Promise<boolean> => {
+  const model = UserEntity()
 
-// }
+  const newToken = jwt.sign({}, secret, {
+    expiresIn: '1s'
+  })
+  const response = await model.updateOne({
+    token
+  }, { token: newToken })
+  
+  return response.modifiedCount ?
+    true : false
+
+}
 
 export const getUserByToken = (token: string): Promise<IUser | null> => {
   const model = UserEntity()

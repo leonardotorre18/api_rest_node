@@ -25,7 +25,7 @@ import {
   userResponse, 
   usersResponse 
 } from "./types/responses";
-import { getUserByToken, getUserByTokenAndId, loginToken } from "../models/orm/AuthOrm";
+import { getUserByTokenAndId, loginToken, removeToken } from "../models/orm/AuthOrm";
 import { IPost } from "../models/interfaces/IPost";
 
 
@@ -86,6 +86,13 @@ export default class SocialController {
 
     // Response
     return loginResponse(token, userAdded)
+  }
+
+  public async logout ( token: string ): Promise<TServerResponse> {
+    const response = await removeToken(token)
+    return response ? 
+      custom200Response('Sesión cerrada Exitosamente')
+      : forbiddenResponse()
   }
 
   public async getUsers (): Promise<TServerResponse> {

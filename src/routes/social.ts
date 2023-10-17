@@ -36,6 +36,18 @@ router.post('/register', async (req: Request, res: Response) => {
   
   res.status(response.status).json(response)
 })
+router.post('/logout', verifyToken, async (req: Request, res: Response) => {
+  const token = req.headers["authorization"];
+  
+
+  const response: TServerResponse = 
+    token ?
+      await controller.logout(token)
+      : forbiddenResponse()
+  
+  res.status(response.status).json(response)
+
+})
 
 
 // busqueda por name y id, tambien agregar follows
