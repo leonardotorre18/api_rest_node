@@ -45,6 +45,14 @@ export const refreshSession = async (token: string): Promise<IUser | null> => {
   return model.findOne({ token: newToken })
 }
 
+export const getSession = async (token: string): Promise<IUser | null> => {
+  const model = UserEntity()
+  const user = await model.findOne({ token })
+
+  if (!user) return null
+  return user
+}
+
 export const getUserByToken = (token: string): Promise<IUser | null> => {
   const model = UserEntity()
   return model.findOne({

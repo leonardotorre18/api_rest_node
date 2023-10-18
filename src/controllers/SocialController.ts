@@ -25,7 +25,7 @@ import {
   userResponse, 
   usersResponse 
 } from "./types/responses";
-import { getUserByTokenAndId, loginToken, refreshSession, removeToken } from "../models/orm/AuthOrm";
+import { getSession, getUserByTokenAndId, loginToken, refreshSession, removeToken } from "../models/orm/AuthOrm";
 import { IPost } from "../models/interfaces/IPost";
 
 
@@ -96,7 +96,7 @@ export default class SocialController {
   }
 
   public async session (token: string): Promise<TServerResponse> {
-    const response = await refreshSession(token)
+    const response = await getSession(token)
     
     return response ?
       userResponse(response)
