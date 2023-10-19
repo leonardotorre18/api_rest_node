@@ -48,11 +48,21 @@ router.post('/logout', verifyToken, async (req: Request, res: Response) => {
   res.status(response.status).json(response)
 
 })
-router.post('/me', verifyToken,async (req:Request, res: Response) => {
+router.post('/session', verifyToken,async (req:Request, res: Response) => {
   const token = req.headers["authorization"];
   let response: TServerResponse
 
-  if (token) response = await controller.session(token)
+  if (token) response = await controller.mySession(token)
+  else response = forbiddenResponse()
+  
+
+  res.status(response.status).json(response)
+})
+router.post('/session/refresh', verifyToken,async (req:Request, res: Response) => {
+  const token = req.headers["authorization"];
+  let response: TServerResponse
+
+  if (token) response = await controller.refreshSession(token)
   else response = forbiddenResponse()
   
 

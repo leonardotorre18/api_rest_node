@@ -95,9 +95,17 @@ export default class SocialController {
       : forbiddenResponse()
   }
 
-  public async session (token: string): Promise<TServerResponse> {
+  public async mySession (token: string): Promise<TServerResponse> {
     const response = await getSession(token)
     
+    return response ?
+      userResponse(response)
+      : forbiddenResponse()
+  }
+
+  public async refreshSession (token: string): Promise<TServerResponse> {
+    const response = await refreshSession(token)
+
     return response ?
       userResponse(response)
       : forbiddenResponse()
