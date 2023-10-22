@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { UserEntity } from "../entities/UserEntity"
 import { IRegister, IUser } from "../interfaces/IUser";
+import { PostEntity } from "../entities/PostEntity";
 
 export const getUsers = async (): Promise<IUser[]> => {
   const model = UserEntity();
@@ -29,7 +30,13 @@ export const getUserByEmail = (email: string): Promise<IUser | null> => {
 export const deleteUser = async (id: mongoose.Types.ObjectId, token: string): Promise<boolean> => {
   const model = UserEntity()
   const response = await model.deleteOne({ _id: id, token })
-  return response.deletedCount ? true : false
+
+  if (response.deletedCount) {
+    await PostEntity().deleteMany({ user: id })
+    return true
+  } else return false
+
+  
 }
 
 export const getUserById = (id: mongoose.Types.ObjectId): Promise<IUser | null> => {
