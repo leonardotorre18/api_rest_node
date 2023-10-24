@@ -122,10 +122,7 @@ router.post('/post/add', verifyToken, async (req: Request, res: Response) => {
 
   if (mongoose.Types.ObjectId.isValid(id) && body && token)
     response = await controller.addPost({user: id, body}, token)
-  else response = forbiddenResponse(
-
-
-  )
+  else response = forbiddenResponse()
   res.status(response.status).json(response)
 })
 router.delete('/post/delete', verifyToken, async (req: Request, res: Response) => {

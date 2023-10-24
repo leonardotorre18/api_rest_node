@@ -2,5 +2,7 @@ import mongoose from "mongoose";
 
 export interface IPost {
   body: string,
-  user: mongoose.Types.ObjectId
+  user: mongoose.Types.ObjectId,
+  createdAt?: Date,
+  updatedAt?: Date,
 }

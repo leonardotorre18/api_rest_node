@@ -10,5 +10,6 @@ export const PostEntity = () => {
     },
     body: { type: 'string', required: true }
   })
+  schema.set('timestamps', true)
   return mongoose.models.posts || mongoose.model<IPost>('posts', schema)
 }

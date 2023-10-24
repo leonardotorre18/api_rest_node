@@ -20,6 +20,7 @@ export const getPosts = async (): Promise<IPost[]> => {
 
   return model.find({})
   .populate("user", "name email")
+  .sort({ updatedAt: -1 })
   .exec()
   .then( (posts) => {
     return <IPost[]>posts
