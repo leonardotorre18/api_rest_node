@@ -10,8 +10,13 @@ export const addPost = (newPost: IPost): Promise<IPost> => {
 
 export const deletePost = async (id: mongoose.Types.ObjectId, token: string): Promise<boolean> => {
   const model = PostEntity()
-  const response = await model.deleteOne({ _id: id, token })
-  return response.deletedCount ? true : false
+  console.log('llegó al controlador')
+  const user = await UserEntity().find({ token })
+  if ( user ) {
+    const response = await model.deleteOne({ _id: id })
+    console.log( response, id )
+    return response.deletedCount ? true : false
+  } else return false
 }
 
 export const getPosts = async (): Promise<IPost[]> => {

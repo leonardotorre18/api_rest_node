@@ -51,7 +51,7 @@ export default class SocialController {
 
     // Create Token
     const token = jwt.sign({ email, password }, secret, {
-      expiresIn: "2h" 
+      // expiresIn: "2h" 
     });
 
     // save login session
@@ -78,7 +78,7 @@ export default class SocialController {
 
     // Create token
     const token = jwt.sign({ email: newUser.email }, secret, {
-      expiresIn: "2h" 
+      // expiresIn: "2h" 
     });
 
     // Save Token
