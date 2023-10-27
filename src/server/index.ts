@@ -4,6 +4,9 @@ import cors from 'cors';
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import morgan from "morgan";
+import swaggerUi from "swagger-ui-express";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerOptions from "../swagger/config";
 
 dotenv.config();
 
@@ -15,6 +18,10 @@ app.use(cors());
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(morgan('dev'));
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(
+  swaggerJSDoc(swaggerOptions)
+))
 
 app.use('/', routes);
 

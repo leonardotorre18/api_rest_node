@@ -1,0 +1,11 @@
+GET http://localhost:3001/social/post
+Authorization: ""
+
+###
+
+POST http://localhost:3001/social/post/add
+# Authorization: { }
+{
+  user: "",
+  body: ""
+}
