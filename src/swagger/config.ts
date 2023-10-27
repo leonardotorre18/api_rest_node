@@ -2,7 +2,7 @@ export default {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "TLeonardoApi",
+      title: "LeonardoApi",
       version: "2.0.0",
       description: "Creada con fines didácticos para estudiantes del Instituto  Alfa Carabobo",
     },
@@ -10,7 +10,7 @@ export default {
       {
         url: "http://localhost:3001",
       },{
-        url: "https://leonardoapi.onrender/",
+        url: "https://leonardoapi.onrender.com/",
       },
     ],
   },
