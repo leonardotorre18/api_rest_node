@@ -42,12 +42,12 @@ export default {
     }
   },
   '/social/users': {
-    get: {
-      security:{
-        BearerAuth: ['BearerAuth']
-      },
+    get: { 
       tags: ['Social'],
       summary: 'Regresa todos los usuario guardados en la base de datos',
+      security: [
+        { BearerAuth: ['BearerAuth'] }
+      ],
       responses: {
         '200': {
           description: 'La petición fue exitosa',
