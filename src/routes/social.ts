@@ -5,11 +5,17 @@ import { TServerResponse } from "../controllers/types";
 import { forbiddenResponse, userResponse } from "../controllers/types/responses";
 import mongoose from "mongoose";
 import { getUserById } from "../models/orm/UserOrm";
-import { refreshSession } from "../models/orm/AuthOrm";
 
 const controller = new SocialController();
 
 const router: Router = Router();
+
+// /**
+//  * @swagger
+//  * tags: 
+//  *  name: Social
+//  */
+
 
 router.post('/login', async (req: Request, res: Response) => {
   let email = req?.body?.email;
@@ -68,7 +74,6 @@ router.post('/session/refresh', verifyToken,async (req:Request, res: Response) =
 
   res.status(response.status).json(response)
 })
-
 
 // busqueda por name y id, tambien agregar follows
 router.get('/users', verifyToken, async (req: Request, res: Response) => {

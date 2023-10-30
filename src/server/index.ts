@@ -7,6 +7,7 @@ import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerOptions from "../swagger/config";
+// import swaggerDocument from "../swagger/config.json"
 
 dotenv.config();
 
@@ -21,6 +22,8 @@ app.use(morgan('dev'));
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(
   swaggerJSDoc(swaggerOptions)
+  // swaggerOptions
+  // swaggerDocument
 ))
 
 app.use('/', routes);
