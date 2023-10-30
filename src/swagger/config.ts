@@ -1,5 +1,7 @@
 import musicRoutes from "./routes/music";
-import musicComponent from "./schemas/music";
+import socialRoutes from "./routes/social";
+import musicSchema from "./schemas/music";
+import userSchema from "./schemas/user";
 
 export default {
   definition: {
@@ -17,15 +19,26 @@ export default {
       },
     ],
     tags: [
-      { name: 'Music', description: 'Simulación de un reproductor de música' }
+      { name: 'Music', description: 'Simulación de un reproductor de música' },
+      { name: 'Social', description: 'Simulación de una Red Social' },
+      { name: 'Movies', description: 'Sumulación de una página de cines' }
     ],
     components: {
       schemas: {
-        ...musicComponent
-      }
+        ...musicSchema,
+        ...userSchema
+      },
+      securitySchemes: {
+        BearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT'
+        }
+      },
     },
     paths: {
-      ...musicRoutes
+      ...musicRoutes,
+      ...socialRoutes
     }
   },
   apis: ["./src/routes/*.ts"],
