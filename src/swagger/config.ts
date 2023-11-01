@@ -3,6 +3,11 @@ import socialRoutes from "./routes/social";
 import musicSchema from "./schemas/music";
 import userSchema from "./schemas/user";
 
+import dotenv from "dotenv";
+
+dotenv.config();
+const PORT: number | string = process.env.PORT || 3000
+
 export default {
   definition: {
     openapi: "3.0.0",
@@ -13,7 +18,7 @@ export default {
     },
     servers: [
       {
-        url: "http://localhost:3001",
+        url: `http://localhost:${PORT}`,
       },{
         url: "https://leonardoapi.onrender.com/",
       },
