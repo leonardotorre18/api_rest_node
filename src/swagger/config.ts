@@ -1,37 +1,37 @@
-import musicRoutes from "./routes/music";
-import socialRoutes from "./routes/social";
-import musicSchema from "./schemas/music";
-import userSchema from "./schemas/user";
+import musicRoutes from './routes/music'
+// import socialRoutes from './routes/social'
+import musicSchema from './schemas/music'
+// import userSchema from './schemas/user'
 
-import dotenv from "dotenv";
+import dotenv from 'dotenv'
 
-dotenv.config();
-const PORT: number | string = process.env.PORT || 3000
+dotenv.config()
+const PORT: number | string = process.env.PORT ?? 3000
 
 export default {
   definition: {
-    openapi: "3.0.0",
+    openapi: '3.0.0',
     info: {
-      title: "LeonardoApi",
-      version: "2.0.0",
-      description: "Creada con fines didácticos para estudiantes del Instituto  Alfa Carabobo",
+      title: 'LeonardoApi',
+      version: '2.0.0',
+      description: 'Creada con fines didácticos para estudiantes del Instituto  Alfa Carabobo'
     },
     servers: [
       {
-        url: `http://localhost:${PORT}`,
-      },{
-        url: "https://leonardoapi.onrender.com/",
-      },
+        url: `http://localhost:${PORT}`
+      }, {
+        url: 'https://leonardoapi.onrender.com/'
+      }
     ],
     tags: [
-      { name: 'Music', description: 'Simulación de un reproductor de música' },
-      { name: 'Social', description: 'Simulación de una Red Social' },
-      { name: 'Movies', description: 'Sumulación de una página de cines' }
+      { name: 'Music', description: 'Simulación de un reproductor de música' }
+      // { name: 'Social', description: 'Simulación de una Red Social' },
+      // { name: 'Movies', description: 'Sumulación de una página de cines' }
     ],
     components: {
       schemas: {
-        ...musicSchema,
-        ...userSchema
+        ...musicSchema
+        // ...userSchema
       },
       securitySchemes: {
         BearerAuth: {
@@ -39,15 +39,15 @@ export default {
           scheme: 'bearer',
           bearerFormat: 'JWT'
         }
-      },
+      }
     },
     paths: {
-      ...musicRoutes,
-      ...socialRoutes
+      ...musicRoutes
+      // ...socialRoutes
     }
   },
-  apis: ["./src/routes/*.ts"],
-};
+  apis: ['./src/routes/*.ts']
+}
 
 // /**
 //  * @swagger
@@ -88,7 +88,7 @@ export default {
 //  *          schema:
 //  *            type: object
 //  *            properties:
-//  *              name: 
+//  *              name:
 //  *                type: string
 //  *                description: de prueba
 //  *    responses:
@@ -99,7 +99,7 @@ export default {
 //  *            schema:
 //  *              type: object
 //  *              properties:
-//  *                _id: 
+//  *                _id:
 //  *                  type: string
 //  *                  description: Identificador Único
 //  */
