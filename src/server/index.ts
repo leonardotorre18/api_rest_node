@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { type Express } from 'express'
 import routes from '../routes'
 import cors from 'cors'
 import mongoose from 'mongoose'
@@ -11,7 +11,7 @@ import swaggerOptions from '../swagger/config'
 
 dotenv.config()
 
-const app: express.Express = express()
+const app: Express = express()
 
 mongoose.connect(process.env.DATABASE_URL ?? '')
   .then(() => {
