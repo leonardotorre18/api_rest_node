@@ -18,9 +18,9 @@ export default {
     },
     servers: [
       {
-        url: `http://localhost:${PORT}`
-      }, {
         url: 'https://leonardoapi.onrender.com/'
+      }, {
+        url: `http://localhost:${PORT}`
       }
     ],
     tags: [
