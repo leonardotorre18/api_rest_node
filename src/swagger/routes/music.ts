@@ -4,7 +4,7 @@ export default {
       tags: ['Music'],
       summary: 'Devuelve la lista de las canciones',
       responses: {
-        '200': {
+        200: {
           description: 'Devuelve todas las caciones ni errores',
           content: {
             'application/json': {
@@ -20,5 +20,5 @@ export default {
       }
     }
   }
-  
+
 }

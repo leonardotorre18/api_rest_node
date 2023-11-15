@@ -28,7 +28,7 @@ export default {
         }
       },
       responses: {
-        '200': {
+        200: {
           description: 'El inicio de sesión se ha realizado con éxito',
           content: {
             'application/json': {
@@ -36,20 +36,20 @@ export default {
                 $ref: '#/components/schemas/Session'
               }
             }
-          },
+          }
         }
       }
     }
   },
   '/social/users': {
-    get: { 
+    get: {
       tags: ['Social'],
       summary: 'Regresa todos los usuario guardados en la base de datos',
       security: [
         { BearerAuth: ['BearerAuth'] }
       ],
       responses: {
-        '200': {
+        200: {
           description: 'La petición fue exitosa',
           content: {
             'application/json': {

@@ -29,10 +29,10 @@ export default {
         example: {
           token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imxlb25hcmRvdG9ycmUxNEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQiLCJpYXQiOjE2OTg2NDE3OTV9.bUIz7liicDJON2dEXjRdv2ynJuGttXASJqrVRraW0GI',
           user: {
-            _id: "65272768e36b6baeb9c29f43",
-            name: "Leonardo Torrealba",
-            email: "leonardotorre14@gmail.com",
-            password: "$2b$08$VUN2oTWjABqqWvI1TRi7..bhz.yc2efdFQBoODZ0Nsz2st5HgQXJC",
+            _id: '65272768e36b6baeb9c29f43',
+            name: 'Leonardo Torrealba',
+            email: 'leonardotorre14@gmail.com',
+            password: '$2b$08$VUN2oTWjABqqWvI1TRi7..bhz.yc2efdFQBoODZ0Nsz2st5HgQXJC'
           }
         }
       }
@@ -52,12 +52,12 @@ export default {
       email: {
         type: 'string',
         description: 'Email del usuario con el cual se registró. Único en la base de datos'
-      },
+      }
     },
     example: {
-      _id: "65272768e36b6baeb9c29f43",
-      name: "Leonardo Torrealba",
-      email: "leonardotorre14@gmail.com",
+      _id: '65272768e36b6baeb9c29f43',
+      name: 'Leonardo Torrealba',
+      email: 'leonardotorre14@gmail.com'
     }
   }
 }

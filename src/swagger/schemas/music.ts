@@ -37,14 +37,14 @@ export default {
       }
     },
     example: {
-      _id: { "$oid": "63e545d97c383420673552f4" },
-      title: "Mr Blue",
-      album: "Mr Blue",
-      duration: "3:03",
-      author: "Catherine Feeny",
+      _id: { $oid: '63e545d97c383420673552f4' },
+      title: 'Mr Blue',
+      album: 'Mr Blue',
+      duration: '3:03',
+      author: 'Catherine Feeny',
       path: {
-        audio: "https://leonardoapi.onrender.com/assets/music/audio/catherinefeeny_mrblue.mp3",
-        front: "https://leonardoapi.onrender.com/assets/music/img/catherinefeeny_mrblue.jpg"
+        audio: 'https://leonardoapi.onrender.com/assets/music/audio/catherinefeeny_mrblue.mp3',
+        front: 'https://leonardoapi.onrender.com/assets/music/img/catherinefeeny_mrblue.jpg'
       }
     }
 
