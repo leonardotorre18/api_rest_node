@@ -1,5 +1,5 @@
 import App from '../server'
-import request from 'supertest';
+import request from 'supertest'
 
 describe('Server is running', () => {
   test('Music Endpoint', async () => {
