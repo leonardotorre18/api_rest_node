@@ -1,20 +1,19 @@
-import express, { Request, Response, Router } from "express";
-import musicController from "../controllers/MusicController";
+import express from 'express'
+import musicController from '../controllers/MusicController'
 
-const router: Router = express.Router()
+const router: express.Router = express.Router()
 const controller: any = new musicController()
 
 router.route('/')
 
+  .get((req: express.Request, res: express.Response) => {
+    const { id } = req?.query
+    let data = []
 
-  .get((req: Request, res: Response) => {
-    const { id } = req?.query;
-    let data = [];
-
-    if (id) data = controller.getDataById(id)
+    if (id !== undefined) data = controller.getDataById(id)
     else data = controller.getAllData()
 
     res.json(data).status(200)
   })
 
-export default router;
+export default router
