@@ -1,9 +1,8 @@
-import { IPost } from "../../models/interfaces/IPost";
-import { IUser} from "../../models/interfaces/IUser";
+import { type IPost } from '../../models/interfaces/IPost'
+import { type IUser } from '../../models/interfaces/IUser'
 
-
-export type TUsersResponse = {
-  status: 200,
+export interface TUsersResponse {
+  status: 200
   users: IUser[]
 }
 export const usersResponse = (users: IUser[]): TUsersResponse => ({
@@ -11,8 +10,8 @@ export const usersResponse = (users: IUser[]): TUsersResponse => ({
   users
 })
 
-export type TUserResponse = {
-  status: 200,
+export interface TUserResponse {
+  status: 200
   user: IUser
 }
 export const userResponse = (user: IUser): TUserResponse => ({
@@ -20,9 +19,9 @@ export const userResponse = (user: IUser): TUserResponse => ({
   user
 })
 
-export type TLoginResponse = {
-  status: 200,
-  token: string,
+export interface TLoginResponse {
+  status: 200
+  token: string
   user: IUser
 }
 export const loginResponse = (token: string, user: IUser): TLoginResponse => ({
@@ -31,8 +30,8 @@ export const loginResponse = (token: string, user: IUser): TLoginResponse => ({
   user
 })
 
-export type TPostsResponse = {
-  status: 200,
+export interface TPostsResponse {
+  status: 200
   posts: IPost[]
 }
 export const postsResponse = (posts: IPost[]): TPostsResponse => ({
@@ -40,8 +39,8 @@ export const postsResponse = (posts: IPost[]): TPostsResponse => ({
   posts
 })
 
-export type TCustom200Response = {
-  status: 200,
+export interface TCustom200Response {
+  status: 200
   message: string
 }
 export const custom200Response = (message: string): TCustom200Response => ({
@@ -49,8 +48,8 @@ export const custom200Response = (message: string): TCustom200Response => ({
   message
 })
 
-export type TCustom403Response = {
-  status: 403,
+export interface TCustom403Response {
+  status: 403
   message: string
 }
 export const custom403Response = (message: string): TCustom403Response => ({
@@ -58,8 +57,8 @@ export const custom403Response = (message: string): TCustom403Response => ({
   message
 })
 
-export type T403Response = {
-  status: 403,
+export interface T403Response {
+  status: 403
   message: string
 }
 export const forbiddenResponse = (): T403Response => ({
@@ -67,8 +66,8 @@ export const forbiddenResponse = (): T403Response => ({
   message: 'Los parámetros enviados son incorrectos'
 })
 
-export type T401Response = {
-  status: 401,
+export interface T401Response {
+  status: 401
   message: string
 }
 export const unauthorizedResponse = (): T401Response => ({
@@ -76,8 +75,8 @@ export const unauthorizedResponse = (): T401Response => ({
   message: 'Unauthorized'
 })
 
-export type T500Response = {
-  status: 500,
+export interface T500Response {
+  status: 500
   message: string
 }
 export const internalServerErrorResponse = (): T500Response => ({

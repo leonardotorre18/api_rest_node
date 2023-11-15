@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import SocialController from "../controllers/SocialController";
-import verifyToken from "../middlewares/VerifyToker";
+import verifyToken from "../middlewares/VerifyToken";
 import { TServerResponse } from "../controllers/types";
 import { forbiddenResponse, userResponse } from "../controllers/types/responses";
 import mongoose from "mongoose";

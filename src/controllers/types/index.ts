@@ -1,4 +1,4 @@
-import { 
+import type {
   T401Response,
   T403Response,
   T500Response,
@@ -7,7 +7,7 @@ import {
   TPostsResponse,
   TUserResponse,
   TUsersResponse
-} from "./responses";
+} from './responses'
 
 export type TServerResponse =
   TCustom200Response |
@@ -18,4 +18,3 @@ export type TServerResponse =
   T403Response |
   T401Response |
   T500Response
-  
