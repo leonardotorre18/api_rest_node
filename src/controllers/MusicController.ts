@@ -1,14 +1,18 @@
-import data from '../json/music.json';
-import { music } from './interfaces/IMusic';
+// import data from '../json/music.json'
+import { MusicResponse200 } from './types/responses'
+import { getAllMusics } from '../models/orm/MusicOrm'
+import { type TServerResponse } from './types'
 
-class musicController {
-  public getAllData(): Array<music>{
-    return data;
+class Controller {
+  public async getAllData (): Promise<TServerResponse> {
+    const response = await getAllMusics()
+    return MusicResponse200(response)
   }
-  public getDataById(id: string): Array<music> {
-    const response = data.filter(item => item._id.$oid == id)
-    return response
-  }
+
+  // public getDataById (id: string): Music[] {
+  //   const response = data.filter(item => item._id.$oid === id)
+  //   return response
+  // }
 }
 
-export default musicController;
+export default Controller

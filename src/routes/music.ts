@@ -1,19 +1,18 @@
-import express from 'express'
-import musicController from '../controllers/MusicController'
+import { type Request, type Response, Router } from 'express'
+import MusicController from '../controllers/MusicController'
+import { type TServerResponse } from '../controllers/types'
+import { internalServerErrorResponse } from '../controllers/types/responses'
 
-const router: express.Router = express.Router()
-const controller: any = new musicController()
+const router: Router = Router()
+const controller: MusicController = new MusicController()
 
-router.route('/')
-
-  .get((req: express.Request, res: express.Response) => {
-    const { id } = req?.query
-    let data = []
-
-    if (id !== undefined) data = controller.getDataById(id)
-    else data = controller.getAllData()
-
-    res.json(data).status(200)
+router.get('/', (req: Request, res: Response) => {
+  controller.getAllData().then((response) => {
+    res.status(response.status).json(response)
+  }).catch(() => {
+    const response: TServerResponse = internalServerErrorResponse()
+    res.status(response.status).json(response)
   })
+})
 
 export default router

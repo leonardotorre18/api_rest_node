@@ -8,7 +8,6 @@ dotenv.config();
 
 const secret = process.env.SECRET_KEY_TOKEN || '';
 
-
 export const loginToken = async ( id: mongoose.Types.ObjectId,  token: string): Promise<boolean> => {
   const model = UserEntity();
   const response = await model.updateOne({ _id: id }, {token})

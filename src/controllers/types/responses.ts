@@ -1,5 +1,6 @@
 import { type IPost } from '../../models/interfaces/IPost'
 import { type IUser } from '../../models/interfaces/IUser'
+import { type Music } from '../../models/interfaces/Music'
 
 export interface TUsersResponse {
   status: 200
@@ -82,4 +83,13 @@ export interface T500Response {
 export const internalServerErrorResponse = (): T500Response => ({
   status: 500,
   message: 'Internal Server Error'
+})
+
+export interface IMusicResponse200 {
+  status: 200
+  songs: Music[]
+}
+export const MusicResponse200 = (music: Music[]): IMusicResponse200 => ({
+  status: 200,
+  songs: music
 })
