@@ -1,29 +1,28 @@
-import { Router, Request, Response } from "express";
-import SocialController from "../controllers/SocialController";
-import verifyToken from "../middlewares/VerifyToken";
-import { TServerResponse } from "../controllers/types";
-import { forbiddenResponse, userResponse } from "../controllers/types/responses";
-import mongoose from "mongoose";
-import { getUserById } from "../models/orm/UserOrm";
+import { Router, type Request, type Response } from 'express'
+import SocialController from '../controllers/SocialController'
+import verifyToken from '../middlewares/VerifyToken'
+import { type TServerResponse } from '../controllers/types'
+import { forbiddenResponse, userResponse } from '../controllers/types/responses'
+import mongoose from 'mongoose'
+import { getUserById } from '../models/orm/UserOrm'
 
-const controller = new SocialController();
+const controller = new SocialController()
 
-const router: Router = Router();
+const router: Router = Router()
 
 // /**
 //  * @swagger
-//  * tags: 
+//  * tags:
 //  *  name: Social
 //  */
 
-
 router.post('/login', async (req: Request, res: Response) => {
-  let email = req?.body?.email;
-  let password = req?.body?.password;
-  let response: TServerResponse;
+  const email = req?.body?.email
+  const password = req?.body?.password
+  let response: TServerResponse
 
-  if ( email && password ) {
-    response = await controller.login(email, password);
+  if (email && password) {
+    response = await controller.login(email, password)
   } else {
     response = forbiddenResponse()
   }
@@ -31,108 +30,96 @@ router.post('/login', async (req: Request, res: Response) => {
   res.status(response.status).json(response)
 })
 router.post('/register', async (req: Request, res: Response) => {
-  let email = req?.body?.email;
-  let password = req?.body?.password;
-  let name = req?.body?.name;
-  let response: TServerResponse;
+  const email = req?.body?.email
+  const password = req?.body?.password
+  const name = req?.body?.name
+  let response: TServerResponse
 
-  if (email && password && name){
+  if (email && password && name) {
     response = await controller.register({ name, email, password })
-  }
-  else response = forbiddenResponse()
-  
+  } else response = forbiddenResponse()
+
   res.status(response.status).json(response)
 })
 router.post('/logout', verifyToken, async (req: Request, res: Response) => {
-  const token = req.headers["authorization"];
+  const token = req.headers.authorization
 
-  const response: TServerResponse = 
-    token ?
-      await controller.logout(token)
+  const response: TServerResponse =
+    token
+      ? await controller.logout(token)
       : forbiddenResponse()
-  
-  res.status(response.status).json(response)
 
+  res.status(response.status).json(response)
 })
-router.post('/session', verifyToken,async (req:Request, res: Response) => {
-  const token = req.headers["authorization"];
+router.post('/session', verifyToken, async (req: Request, res: Response) => {
+  const token = req.headers.authorization
   let response: TServerResponse
 
   if (token) response = await controller.mySession(token)
   else response = forbiddenResponse()
-  
 
   res.status(response.status).json(response)
 })
-router.post('/session/refresh', verifyToken,async (req:Request, res: Response) => {
-  const token = req.headers["authorization"];
+router.post('/session/refresh', verifyToken, async (req: Request, res: Response) => {
+  const token = req.headers.authorization
   let response: TServerResponse
 
   if (token) response = await controller.refreshSession(token)
   else response = forbiddenResponse()
-  
 
   res.status(response.status).json(response)
 })
 
 // busqueda por name y id, tambien agregar follows
 router.get('/users', verifyToken, async (req: Request, res: Response) => {
-  const response = await controller.getUsers();
+  const response = await controller.getUsers()
   res.status(response.status).json(response)
 })
 router.get('/users/id/:id_user', verifyToken, async (req: Request, res: Response) => {
-  let response: TServerResponse;
-  
-  // Validation ID
-  if(mongoose.Types.ObjectId.isValid(req.params?.id_user)) {
+  let response: TServerResponse
 
+  // Validation ID
+  if (mongoose.Types.ObjectId.isValid(req.params?.id_user)) {
     // Find User
-    const id = new mongoose.Types.ObjectId(req.params.id_user);
+    const id = new mongoose.Types.ObjectId(req.params.id_user)
     const user = await getUserById(id)
 
     // Validation response
-    response = user ?
-      userResponse(user)
+    response = (user != null)
+      ? userResponse(user)
       : forbiddenResponse()
-
   } else response = forbiddenResponse()
 
   res.status(response.status).json(response)
-
 })
 router.delete('/users/delete', verifyToken, async (req: Request, res: Response) => {
   const id = req.body.id
-  const token = req.headers["authorization"];
-
-  let response: TServerResponse;
-
-  if (mongoose.Types.ObjectId.isValid(id) && token)
-    response = await controller.deleteUser(id, token)
-  else response = forbiddenResponse()
-
-  res.status(response.status).json(response)
-})
-
-
-router.get('/post', verifyToken, async (req: Request, res: Response) => {
-  const response = await controller.getPosts();
-  res.status(response.status).json(response)
-})
-router.post('/post/add', verifyToken, async (req: Request, res: Response) => {
-  let id = req?.body?.id;
-  let body = req?.body?.body;
-  const token = req.headers["authorization"];
+  const token = req.headers.authorization
 
   let response: TServerResponse
 
-  if (mongoose.Types.ObjectId.isValid(id) && body && token)
-    response = await controller.addPost({user: id, body}, token)
-  else response = forbiddenResponse()
+  if (mongoose.Types.ObjectId.isValid(id) && token) { response = await controller.deleteUser(id, token) } else response = forbiddenResponse()
+
+  res.status(response.status).json(response)
+})
+
+router.get('/post', verifyToken, async (req: Request, res: Response) => {
+  const response = await controller.getPosts()
+  res.status(response.status).json(response)
+})
+router.post('/post/add', verifyToken, async (req: Request, res: Response) => {
+  const id = req?.body?.id
+  const body = req?.body?.body
+  const token = req.headers.authorization
+
+  let response: TServerResponse
+
+  if (mongoose.Types.ObjectId.isValid(id) && body && token) { response = await controller.addPost({ user: id, body }, token) } else response = forbiddenResponse()
   res.status(response.status).json(response)
 })
 router.delete('/post/delete', verifyToken, async (req: Request, res: Response) => {
-  const id = req?.body.id;
-  const token = req.headers["authorization"]
+  const id = req?.body.id
+  const token = req.headers.authorization
 
   let response: TServerResponse
 

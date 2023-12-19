@@ -1,5 +1,10 @@
 import mongoose, { type Model } from 'mongoose'
 import { type IUser } from '../interfaces/IUser'
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+dotenv.config()
+
+const SECRET_KEY_TOKEN: string = process.env.SECRET_KEY_TOKEN ?? ''
 
 export const UserEntity = (): Model<IUser> => {
   const schema = new mongoose.Schema<IUser>({
@@ -17,7 +22,7 @@ export const UserEntity = (): Model<IUser> => {
     token: {
       type: 'string',
       unique: true,
-      default: ''
+      default: jwt.sign({}, SECRET_KEY_TOKEN)
     }
   })
   return mongoose.models.users ?? mongoose.model<IUser>('users', schema)

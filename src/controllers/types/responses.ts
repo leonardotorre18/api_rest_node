@@ -93,3 +93,12 @@ export const MusicResponse200 = (music: Music[]): IMusicResponse200 => ({
   status: 200,
   songs: music
 })
+
+export interface IMusicAddResponse200 {
+  status: 200
+  songs: Music
+}
+export const MusicAddResponse200 = (music: Music): IMusicAddResponse200 => ({
+  status: 200,
+  songs: music
+})

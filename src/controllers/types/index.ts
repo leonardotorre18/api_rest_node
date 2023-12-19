@@ -7,7 +7,8 @@ import type {
   TPostsResponse,
   TUserResponse,
   TUsersResponse,
-  IMusicResponse200
+  IMusicResponse200,
+  IMusicAddResponse200
 } from './responses'
 
 export type TServerResponse =
@@ -19,4 +20,5 @@ export type TServerResponse =
   T403Response |
   T401Response |
   T500Response |
-  IMusicResponse200
+  IMusicResponse200 |
+  IMusicAddResponse200

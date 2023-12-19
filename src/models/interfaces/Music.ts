@@ -1,7 +1,4 @@
-import { type ObjectId } from 'mongoose'
-
 export interface Music {
-  _id: ObjectId
   title: string
   author: string
   album: string

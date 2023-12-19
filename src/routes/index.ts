@@ -1,15 +1,17 @@
-import express from 'express'
-import musicRoute from './music'
+import express, { type Express } from 'express'
+import musicRouter from './music'
+import blogRouter from './blog'
+import authRouter from './auth'
 // import moviesRoute from './movies'
 // import formRoute from './form'
-import cinemaRouter from './cinema'
 // import socialRoute from './social'
 
-const server: express.Express = express()
+const server: Express = express()
 
-server.use('/music', musicRoute)
+server.use('/music', musicRouter)
+server.use('/blog', blogRouter)
+server.use('/auth', authRouter)
 // server.use('/movies', moviesRoute)
-server.use('/cinema', cinemaRouter)
 // server.use('/form', formRoute);
 // server.use('/social', socialRoute)
 

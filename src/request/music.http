@@ -1,1 +1,8 @@
 GET http://localhost:3000/music
+
+###
+
+POST http://localhost:3000/music HTTP/1.1
+content-type: application/json
+
+{}
