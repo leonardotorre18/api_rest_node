@@ -68,19 +68,6 @@ export default class SocialController {
       : forbiddenResponse()
   }
 
-  public async getPosts (): Promise<TServerResponse> {
-    const posts = await getPosts()
-    return postsResponse(posts)
-  }
-
-  public async addPost ({ body, user }: IPost, token: string): Promise<TServerResponse> {
-    const userValid = await getUserByTokenAndId(user, token)
-    if (userValid == null) return forbiddenResponse()
-
-    await addPost({ body, user })
-    return custom200Response('Post agregado Correctamente')
-  }
-
   public async deletePost (id: mongoose.Types.ObjectId, token: string): Promise<TServerResponse> {
     // Delete Post
     const response = await deletePost(id, token)

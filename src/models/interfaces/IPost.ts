@@ -1,8 +1,7 @@
-import type mongoose from 'mongoose'
+import { type ObjectId } from 'mongoose'
 
 export interface IPost {
+  title: string
   body: string
-  user: mongoose.Types.ObjectId
-  createdAt?: Date
-  updatedAt?: Date
+  user: ObjectId
 }

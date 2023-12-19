@@ -16,31 +16,6 @@ const router: Router = Router()
 //  *  name: Social
 //  */
 
-router.post('/login', async (req: Request, res: Response) => {
-  const email = req?.body?.email
-  const password = req?.body?.password
-  let response: TServerResponse
-
-  if (email && password) {
-    response = await controller.login(email, password)
-  } else {
-    response = forbiddenResponse()
-  }
-
-  res.status(response.status).json(response)
-})
-router.post('/register', async (req: Request, res: Response) => {
-  const email = req?.body?.email
-  const password = req?.body?.password
-  const name = req?.body?.name
-  let response: TServerResponse
-
-  if (email && password && name) {
-    response = await controller.register({ name, email, password })
-  } else response = forbiddenResponse()
-
-  res.status(response.status).json(response)
-})
 router.post('/logout', verifyToken, async (req: Request, res: Response) => {
   const token = req.headers.authorization
 
@@ -56,15 +31,6 @@ router.post('/session', verifyToken, async (req: Request, res: Response) => {
   let response: TServerResponse
 
   if (token) response = await controller.mySession(token)
-  else response = forbiddenResponse()
-
-  res.status(response.status).json(response)
-})
-router.post('/session/refresh', verifyToken, async (req: Request, res: Response) => {
-  const token = req.headers.authorization
-  let response: TServerResponse
-
-  if (token) response = await controller.refreshSession(token)
   else response = forbiddenResponse()
 
   res.status(response.status).json(response)
@@ -103,10 +69,6 @@ router.delete('/users/delete', verifyToken, async (req: Request, res: Response) 
   res.status(response.status).json(response)
 })
 
-router.get('/post', verifyToken, async (req: Request, res: Response) => {
-  const response = await controller.getPosts()
-  res.status(response.status).json(response)
-})
 router.post('/post/add', verifyToken, async (req: Request, res: Response) => {
   const id = req?.body?.id
   const body = req?.body?.body

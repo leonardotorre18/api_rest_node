@@ -23,9 +23,9 @@ export default class Controller {
     const name: string = req?.body?.name
 
     if (
-      email.length >= 10 &&
-      password.length >= 8 &&
-      name.length <= 3
+      email !== undefined && email.length >= 10 &&
+      password !== undefined && password.length >= 8 &&
+      name !== undefined && name.length <= 3
     ) {
       register(name, email, password)
         .then((user: IUser) => res.status(201).json(user))
