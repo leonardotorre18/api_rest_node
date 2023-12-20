@@ -23,6 +23,12 @@ export const login = async (email: string, password: string): Promise<IUser> => 
   throw new Error()
 }
 
+export const logout = async (token: string): Promise<string> => {
+  const model = UserEntity()
+  await model.updateOne({ token }, { token: jwt.sign({ }, SECRET_KEY_TOKEN) })
+  return token
+}
+
 export const register = async (name: string, email: string, password: string): Promise<IUser> => {
   const model: Model<IUser> = UserEntity()
 
@@ -51,6 +57,15 @@ export const deleteUser = async (id: string, token: string): Promise<IUser> => {
   const model = UserEntity()
 
   const user = await model.findOneAndDelete({ _id: id, token })
+
+  if (user == null) throw new Error()
+
+  return user
+}
+
+export const getUserByToken = async (token: string): Promise<IUser> => {
+  const model = UserEntity()
+  const user = await model.findOne({ token })
 
   if (user == null) throw new Error()
 

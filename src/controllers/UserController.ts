@@ -1,5 +1,5 @@
 import { type Request, type Response } from 'express'
-import { deleteUser, getUserById, getUsers, login, register } from '../models/orm/UserOrm'
+import { deleteUser, getUserById, getUserByToken, getUsers, login, logout, register } from '../models/orm/UserOrm'
 import { type IUser } from '../models/interfaces/IUser'
 
 export default class Controller {
@@ -15,6 +15,16 @@ export default class Controller {
         .then((user: IUser) => res.status(200).json(user))
         .catch(() => res.status(403).json({ error: 'Forbidden' }))
     } else res.status(403).json({ error: 'Forbidden' })
+  }
+
+  public logout (req: Request, res: Response): void {
+    const token = req?.headers?.authorization
+
+    if (token !== undefined) {
+      logout(token)
+        .then((token: string) => res.status(200).json(token))
+        .catch(() => res.status(400).json({}))
+    } else res.status(400).json({})
   }
 
   public register (req: Request, res: Response): void {
@@ -58,5 +68,15 @@ export default class Controller {
         .then((user: IUser) => res.status(200).json(user))
         .catch(() => res.status(403).json({}))
     } else res.status(403).json({})
+  }
+
+  public getUserByToken (req: Request, res: Response): void {
+    const token = req?.headers?.authorization
+
+    if (token !== undefined) {
+      getUserByToken(token)
+        .then((user: IUser) => res.status(200).json(user))
+        .catch(() => res.status(400).json({}))
+    } else res.status(400).json({})
   }
 }

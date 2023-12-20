@@ -7,6 +7,8 @@ const controller: Controller = new Controller()
 
 router.post('/login', controller.login)
 router.post('/register', controller.register)
+router.get('/session', controller.getUserByToken)
+router.post('/logout', controller.logout)
 
 router.route('/:id')
   .delete(controller.deleteUser)
