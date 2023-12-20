@@ -51,18 +51,3 @@ export const getSession = async (token: string): Promise<IUser | null> => {
   if (!user) return null
   return user
 }
-
-export const getUserByToken = (token: string): Promise<IUser | null> => {
-  const model = UserEntity()
-  return model.findOne({
-    token
-  }, { password: 0, token: 0 })
-}
-
-export const getUserByTokenAndId = (id: mongoose.Types.ObjectId, token: string): Promise<IUser | null> => {
-  const model = UserEntity()
-  return model.findOne({
-    token,
-    _id: id
-  })
-}

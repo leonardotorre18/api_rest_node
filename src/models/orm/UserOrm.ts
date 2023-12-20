@@ -1,5 +1,5 @@
 // import type mongoose from 'mongoose'
-import { type Model } from 'mongoose'
+import { isValidObjectId, type Model } from 'mongoose'
 import { UserEntity } from '../entities/UserEntity'
 import { type IUser } from '../interfaces/IUser'
 import bcrypt from 'bcrypt'
@@ -40,6 +40,23 @@ export const register = async (name: string, email: string, password: string): P
   return register
 }
 
+export const getUsers = async (): Promise<IUser[]> => {
+  const model = UserEntity()
+
+  return await model.find({}, { _id: 1, name: 1, email: 1 })
+}
+
+export const deleteUser = async (id: string, token: string): Promise<IUser> => {
+  if (!isValidObjectId(id)) throw new Error()
+  const model = UserEntity()
+
+  const user = await model.findOneAndDelete({ _id: id, token })
+
+  if (user == null) throw new Error()
+
+  return user
+}
+
 // export const getUsers = async (): Promise<IUser[]> => {
 //   const model = UserEntity()
 //   return await model.aggregate([
@@ -55,17 +72,11 @@ export const register = async (name: string, email: string, password: string): P
 //   }, { token: 0 })
 // }
 
-// export const deleteUser = async (id: mongoose.Types.ObjectId, token: string): Promise<boolean> => {
-//   const model = UserEntity()
-//   const response = await model.deleteOne({ _id: id, token })
+export const getUserById = async (id: string): Promise<IUser> => {
+  if (!isValidObjectId(id)) throw new Error()
+  const model = UserEntity()
+  const result = await model.findById(id, { _id: 1, email: 1, name: 1 })
 
-//   if (response.deletedCount) {
-//     await PostEntity().deleteMany({ user: id })
-//     return true
-//   } else return false
-// }
-
-// export const getUserById = async (id: mongoose.Types.ObjectId): Promise<IUser | null> => {
-//   const model = UserEntity()
-//   return await model.findById(id, { password: 0, token: 0 })
-// }
+  if (result == null) throw new Error()
+  else return result
+}
