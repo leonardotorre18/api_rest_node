@@ -8,8 +8,9 @@ export default class Controller {
     const password: string = req?.body?.password
 
     if (
-      email.length >= 10 &&
-      password.length >= 8
+      email.length >= 10
+      // &&
+      // password.length >= 8
     ) {
       login(email, password)
         .then((user: IUser) => res.status(200).json(user))

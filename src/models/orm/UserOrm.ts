@@ -14,8 +14,12 @@ export const login = async (email: string, password: string): Promise<IUser> => 
 
   const result = await model.findOne({ email })
 
-  if (result != null && bcrypt.compareSync(password, result.password)) return result
+  if (result != null && bcrypt.compareSync(password, result.password)) {
+    const session = await model.findOneAndUpdate({ email }, { token: jwt.sign({ email }, SECRET_KEY_TOKEN) }, { new: true })
+    if (session == null) throw new Error()
 
+    return session
+  }
   throw new Error()
 }
 

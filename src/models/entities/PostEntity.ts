@@ -1,15 +1,16 @@
-import mongoose, { type Model } from 'mongoose'
+import { type Model, Schema, model, models } from 'mongoose'
 import { type IPost } from '../interfaces/IPost'
 
 export const PostEntity = (): Model<IPost> => {
-  const schema = new mongoose.Schema<IPost>({
+  const schema = new Schema<IPost>({
     user: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: 'string',
       ref: 'users',
       required: true
     },
-    body: { type: 'string', required: true }
+    body: { type: 'string', required: true },
+    title: { type: 'string', required: true }
   })
   schema.set('timestamps', true)
-  return mongoose.models.posts ?? mongoose.model<IPost>('posts', schema)
+  return models.posts ?? model<IPost>('posts', schema)
 }
