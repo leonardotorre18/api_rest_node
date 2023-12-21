@@ -8,7 +8,6 @@ export const createPost = async (newPost: IPost, token: string): Promise<IPost> 
 
   if (validated == null) throw new Error('Usuario no valido')
 
-  console.log(validated, newPost, token)
   return await model.create(newPost)
 }
 

@@ -22,8 +22,8 @@ mongoose.connect(process.env.DATABASE_URL ?? '')
   })
 
 app.use(cors())
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json())
+app.use(express.urlencoded({ extended: false, limit: '25mb' }))
+app.use(express.json({ limit: '25mb' }))
 app.use(morgan('dev'))
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(

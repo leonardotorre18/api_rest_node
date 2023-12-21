@@ -8,6 +8,9 @@ export const PostEntity = (): Model<IPost> => {
       ref: 'users',
       required: true
     },
+    imgPath: {
+      type: 'string'
+    },
     body: { type: 'string', required: true },
     title: { type: 'string', required: true }
   })

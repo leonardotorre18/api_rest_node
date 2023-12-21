@@ -1,7 +1,28 @@
 import type { Request, Response } from 'express'
-import { createPost, deletePost, getPostById, getPosts, getPostsByUser, updatePost } from '../models/orm/PostOrm'
+import {
+  createPost,
+  deletePost,
+  getPostById,
+  getPosts,
+  getPostsByUser,
+  updatePost
+} from '../models/orm/PostOrm'
 import type { IPost } from '../models/interfaces/IPost'
 import { isValidObjectId } from 'mongoose'
+import { v2 as cloudinary } from 'cloudinary'
+import LoadImages from '../middlewares/LoadImages'
+import dotenv from 'dotenv'
+dotenv.config()
+
+const cloudName = process.env.CLOUDINARY_CLOUD_NAME ?? ''
+const apiKey = process.env.CLOUDINARY_API_KEY ?? ''
+const apiSecret = process.env.CLOUDINARY_API_SECRET ?? ''
+
+cloudinary.config({
+  cloud_name: cloudName,
+  api_key: apiKey,
+  api_secret: apiSecret
+})
 
 export class PostController {
   public getPost (req: Request, res: Response): void {
@@ -11,25 +32,43 @@ export class PostController {
   }
 
   public addPost (req: Request, res: Response): void {
-    const title: string = req?.body?.title
-    const body: string = req?.body?.body
-    const user: string = req?.body?.user
-    const token: string | undefined = req?.headers?.authorization
+    // This middleware need be here to handle errors
 
-    if (
-      title !== undefined && title.length >= 10 &&
-      body !== undefined && body.length >= 30 &&
-      isValidObjectId(user) &&
-      token !== undefined
-    ) {
-      createPost({
-        title,
-        body,
-        user
-      }, token)
-        .then((post: IPost) => res.status(201).json(post))
-        .catch(() => res.status(403).json({}))
-    } else res.status(403).json({})
+    LoadImages(req, res, (err) => {
+      if (err !== undefined) res.status(500).json(err)
+
+      else {
+        const title: string = req?.body?.title
+        const body: string = req?.body?.body
+        const user: string = req?.body?.user
+        const image = req?.file
+        const token: string | undefined = req?.headers?.authorization
+
+        if (
+          title !== undefined && title.length >= 10 &&
+          body !== undefined && body.length >= 30 &&
+          image !== undefined &&
+          isValidObjectId(user) &&
+          token !== undefined
+        ) {
+          if (image?.path !== undefined) {
+            cloudinary.uploader.upload(image.path)
+              .then((imgLoad) => {
+                createPost({
+                  title,
+                  body,
+                  user,
+                  imgPath: imgLoad.url
+                }, token)
+                  .then((post: IPost) => res.status(201).json(post))
+                  .catch(() => res.status(403).json({}))
+              })
+              .catch((err) => { console.log(err); return err })
+          }
+        } else res.status(403).json({})
+      }
+      // Everything went fine and save document in DB here.
+    })
   }
 
   public deletePost (req: Request, res: Response): void {

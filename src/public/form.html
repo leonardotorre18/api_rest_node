@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+  <form action="/posts/" method="post" id="form" enctype="multipart/form-data">
+    <input type="text" name="title" id="title">
+    <input type="text" name="body" id="body">
+
+    <input type="file" name="image" id="image">
+
+    <input type="submit" value="Enviar">
+  </form>
+
+  <!-- <script>
+    document.querySelector('#form').addEventListener('submit', e => {
+      e.preventDefault()
+      const { image, title, body } = e.target
+      console.log(image.value)
+
+      axios.post('http://localhost:3000/posts/', {
+        image: image.value,
+        body: body.value,
+        title: title.value
+      })
+        .then( ({ data }) => console.log(data))
+    })
+  </script> -->
+</body>
+</html>
