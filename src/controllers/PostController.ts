@@ -35,6 +35,7 @@ export class PostController {
     // This middleware need be here to handle errors
 
     LoadImages(req, res, (err) => {
+      // Validation errors
       if (err !== undefined) res.status(500).json(err)
 
       else {
@@ -49,22 +50,24 @@ export class PostController {
           body !== undefined && body.length >= 30 &&
           image !== undefined &&
           isValidObjectId(user) &&
-          token !== undefined
+          token !== undefined &&
+          image.path !== undefined
         ) {
-          if (image?.path !== undefined) {
-            cloudinary.uploader.upload(image.path)
-              .then((imgLoad) => {
-                createPost({
-                  title,
-                  body,
-                  user,
-                  imgPath: imgLoad.url
-                }, token)
-                  .then((post: IPost) => res.status(201).json(post))
-                  .catch(() => res.status(403).json({}))
-              })
-              .catch((err) => { console.log(err); return err })
-          }
+          cloudinary.uploader.upload(image.path)
+            .then((imgLoad) => {
+              createPost({
+                title,
+                body,
+                user,
+                img: {
+                  url: imgLoad.url,
+                  id: imgLoad.public_id
+                }
+              }, token)
+                .then((post: IPost) => res.status(201).json(post))
+                .catch(() => res.status(403).json({}))
+            })
+            .catch((err) => res.status(403).json({ err }))
         } else res.status(403).json({})
       }
       // Everything went fine and save document in DB here.
@@ -106,18 +109,60 @@ export class PostController {
   }
 
   public updatePost (req: Request, res: Response): void {
-    const title: string | undefined = req?.body?.title
-    const body: string | undefined = req?.body?.body
-    const id = req?.params?.id
-    const token = req?.headers?.authorization
+    // This middleware need be here to handle errors
 
-    if (id !== undefined && token !== undefined) {
-      updatePost({
-        title,
-        body
-      }, id, token)
-        .then((post: IPost) => res.status(200).json(post))
-        .catch(() => res.status(403).json({}))
-    } else res.status(403).json({})
+    LoadImages(req, res, (err) => {
+      // Validation errors
+      if (err !== undefined) res.status(500).json(err)
+
+      else {
+        const title: string | undefined = req?.body?.title
+        const body: string | undefined = req?.body?.body
+        const imageId = req?.body?.imageId
+        // const user = req?.body?.user
+
+        const id = req?.params?.id
+
+        const image = req?.file
+
+        const token = req?.headers?.authorization
+
+        console.log(id)
+
+        if (id !== undefined && token !== undefined) {
+          // Condicional for update image or not
+          if (image !== undefined && imageId !== undefined) {
+            // Delete old image if exist new image
+            cloudinary.uploader.destroy(imageId)
+              .then((res) => res)
+              .catch(err => err)
+
+            // Update post with image
+            cloudinary.uploader.upload(image.path)
+              .then((imgLoad) => {
+                updatePost({
+                  title,
+                  body,
+                  img: {
+                    url: imgLoad.url,
+                    id: imgLoad.public_id
+                  }
+                }, id, token)
+                  .then((post: IPost) => res.status(200).json(post))
+                  .catch(() => res.status(403).json({}))
+              })
+              .catch(() => res.status(403).json({}))
+          } else {
+            // Update post without image
+            updatePost({
+              title,
+              body
+            }, id, token)
+              .then((post: IPost) => res.status(200).json(post))
+              .catch(() => res.status(403).json({}))
+          }
+        } else res.status(403).json({})
+      }
+    })
   }
 }

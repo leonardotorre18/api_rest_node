@@ -49,17 +49,33 @@ export const getPostsByUser = async (id: string): Promise<IPost[]> => {
   return await model.find({ user: id }).populate('user', 'name email')
 }
 
-export const updatePost = async ({ title, body }: { title?: string, body?: string }, id: string, token: string): Promise<IPost> => {
+export const updatePost = async (
+  {
+    title,
+    body,
+    img
+  }:
+  {
+    title?: string
+    body?: string
+    img?: {
+      url: string
+      id: string
+    }
+  },
+  id: string, token: string
+): Promise<IPost> => {
   const model = PostEntity()
 
   const user = await UserEntity().findOne({ token })
   if (user == null) throw new Error('Datos inválidos')
 
   const result = await model.findByIdAndUpdate(
-    { _id: id, user: user?._id },
+    { _id: id, user: user._id },
     {
       title,
-      body
+      body,
+      img
     }, { new: true })
   if (result == null) throw new Error('Datos inválidos')
 
