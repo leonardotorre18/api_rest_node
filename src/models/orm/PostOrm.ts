@@ -4,7 +4,7 @@ import type { IPost } from '../interfaces/IPost'
 
 export const createPost = async (newPost: IPost, token: string): Promise<IPost> => {
   const model = PostEntity()
-  const validated = await UserEntity().findOne({ _id: newPost.user, token })
+  const validated = await UserEntity().findOne({ token })
 
   if (validated == null) throw new Error('Usuario no valido')
 
@@ -23,13 +23,22 @@ export const deletePost = async (id: string, token: string): Promise<IPost> => {
   else throw new Error('No se encontró el post')
 }
 
-export const getPosts = async (): Promise<IPost[]> => {
+export const getPosts = async (limit?: number, page?: number): Promise<IPost[]> => {
   const model = PostEntity()
   UserEntity()
 
   return await model.find({})
     .populate('user', 'name email')
     .sort({ updatedAt: -1 })
+    .limit(limit ?? 6)
+    .skip(
+      // is limit and page exist, generate pagination
+      page !== undefined &&
+      limit !== undefined &&
+      page > 0 && limit > 0
+        ? (page - 1) * limit
+        : 0
+    )
     .exec()
 }
 

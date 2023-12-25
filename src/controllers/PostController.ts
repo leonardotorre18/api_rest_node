@@ -26,9 +26,25 @@ cloudinary.config({
 
 export class PostController {
   public getPost (req: Request, res: Response): void {
-    getPosts()
-      .then((posts: IPost[]) => res.status(200).json(posts))
-      .catch(() => res.status(500).json({}))
+    const { limit, page } = req.query
+    if (
+      limit !== undefined && typeof limit !== 'object' &&
+      page !== undefined && typeof page !== 'object'
+    ) {
+      getPosts(parseInt(limit.toString()), parseInt(page.toString()))
+        .then((posts: IPost[]) => res.status(200).json({
+          posts,
+          limit: parseInt(limit),
+          page: parseInt(page) > 0 ? parseInt(page) : 1
+        }))
+        .catch((err) => res.status(500).json({ err }))
+    } else {
+      getPosts()
+        .then((posts: IPost[]) => res.status(200).json({
+          posts
+        }))
+        .catch(() => res.status(500).json({}))
+    }
   }
 
   public addPost (req: Request, res: Response): void {
@@ -41,7 +57,6 @@ export class PostController {
       else {
         const title: string = req?.body?.title
         const body: string = req?.body?.body
-        const user: string = req?.body?.user
         const image = req?.file
         const token: string | undefined = req?.headers?.authorization
 
@@ -49,7 +64,6 @@ export class PostController {
           title !== undefined && title.length >= 10 &&
           body !== undefined && body.length >= 30 &&
           image !== undefined &&
-          isValidObjectId(user) &&
           token !== undefined &&
           image.path !== undefined
         ) {
@@ -58,13 +72,13 @@ export class PostController {
               createPost({
                 title,
                 body,
-                user,
+                user: 'Is not Necesary',
                 img: {
                   url: imgLoad.url,
                   id: imgLoad.public_id
                 }
               }, token)
-                .then((post: IPost) => res.status(201).json(post))
+                .then((post: IPost) => res.status(201).json({ post }))
                 .catch(() => res.status(403).json({}))
             })
             .catch((err) => res.status(403).json({ err }))
@@ -83,7 +97,7 @@ export class PostController {
       token !== undefined
     ) {
       deletePost(id, token)
-        .then((post) => res.status(200).json(post))
+        .then((post) => res.status(200).json({ post }))
         .catch(() => res.status(403).json({}))
     }
   }
@@ -93,17 +107,17 @@ export class PostController {
 
     if (isValidObjectId(id)) {
       getPostById(id)
-        .then((post: IPost) => res.status(200).json(post))
+        .then((post: IPost) => res.status(200).json({ post }))
         .catch(() => res.status(403).json({}))
     } else res.status(403).json({})
   }
 
-  public getPostByUser (req: Request, res: Response): void {
+  public getPostsByUser (req: Request, res: Response): void {
     const id = req?.params?.id
 
     if (isValidObjectId(id)) {
       getPostsByUser(id)
-        .then((posts: IPost[]) => res.status(200).json(posts))
+        .then((posts: IPost[]) => res.status(200).json({ posts }))
         .catch(() => res.status(403).json({}))
     } else res.status(403).json({})
   }
@@ -118,7 +132,6 @@ export class PostController {
       else {
         const title: string | undefined = req?.body?.title
         const body: string | undefined = req?.body?.body
-        const imageId = req?.body?.imageId
         // const user = req?.body?.user
 
         const id = req?.params?.id
@@ -131,11 +144,15 @@ export class PostController {
 
         if (id !== undefined && token !== undefined) {
           // Condicional for update image or not
-          if (image !== undefined && imageId !== undefined) {
+          if (image !== undefined) {
             // Delete old image if exist new image
-            cloudinary.uploader.destroy(imageId)
-              .then((res) => res)
-              .catch(err => err)
+            getPostById(id)
+              .then((post: IPost) => {
+                cloudinary.uploader.destroy(post.img.id)
+                  .then((res) => res)
+                  .catch(err => err)
+              })
+              .catch(err => res.status(500).json({ err }))
 
             // Update post with image
             cloudinary.uploader.upload(image.path)
@@ -148,7 +165,7 @@ export class PostController {
                     id: imgLoad.public_id
                   }
                 }, id, token)
-                  .then((post: IPost) => res.status(200).json(post))
+                  .then((post: IPost) => res.status(200).json({ post }))
                   .catch(() => res.status(403).json({}))
               })
               .catch(() => res.status(403).json({}))
@@ -158,7 +175,7 @@ export class PostController {
               title,
               body
             }, id, token)
-              .then((post: IPost) => res.status(200).json(post))
+              .then((post: IPost) => res.status(200).json({ post }))
               .catch(() => res.status(403).json({}))
           }
         } else res.status(403).json({})

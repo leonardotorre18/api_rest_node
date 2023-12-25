@@ -5,7 +5,7 @@ const router: Router = Router()
 const controller: PostController = new PostController()
 
 router.route('/user/:id')
-  .get(controller.getPostByUser)
+  .get(controller.getPostsByUser)
 
 router.route('/:id')
   .get(controller.getPostById)
