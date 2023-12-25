@@ -1,5 +1,5 @@
 import express, { type Express } from 'express'
-import musicRouter from './music'
+import songRouter from './songs'
 import postsRouter from './posts'
 import authRouter from './users'
 // import moviesRoute from './movies'
@@ -8,7 +8,7 @@ import authRouter from './users'
 
 const server: Express = express()
 
-server.use('/music', musicRouter)
+server.use('/songs', songRouter)
 server.use('/posts', postsRouter)
 server.use('/users', authRouter)
 // server.use('/movies', moviesRoute)

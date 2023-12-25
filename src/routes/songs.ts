@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import MusicController from '../controllers/MusicController'
+import SongController from '../controllers/SongController'
 
 const router: Router = Router()
-const controller: MusicController = new MusicController()
+const controller: SongController = new SongController()
 
 router.route('/').get(controller.getSongs)
 

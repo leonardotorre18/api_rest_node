@@ -1,8 +1,8 @@
 import { type Model, Schema, models, model } from 'mongoose'
-import { type Music } from '../interfaces/Music'
+import { type ISong } from '../interfaces/ISong'
 
-export const MusicEntity = (): Model<Music> => {
-  const schema = new Schema<Music>({
+export const MusicEntity = (): Model<ISong> => {
+  const schema = new Schema<ISong>({
     title: {
       type: 'string',
       required: true
@@ -27,5 +27,5 @@ export const MusicEntity = (): Model<Music> => {
     }
   })
 
-  return models.musics ?? model<Music>('musics', schema)
+  return models.musics ?? model<ISong>('musics', schema)
 }

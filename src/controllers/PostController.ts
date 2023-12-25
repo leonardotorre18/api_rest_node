@@ -72,7 +72,7 @@ export class PostController {
               createPost({
                 title,
                 body,
-                user: 'Is not Necesary',
+                user: 'Is not Necessary',
                 img: {
                   url: imgLoad.url,
                   id: imgLoad.public_id

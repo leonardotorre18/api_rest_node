@@ -1,6 +1,6 @@
 import { type IPost } from '../../models/interfaces/IPost'
 import { type IUser } from '../../models/interfaces/IUser'
-import { type Music } from '../../models/interfaces/Music'
+import { type Music } from '../../models/interfaces/ISong'
 
 export interface TUsersResponse {
   status: 200

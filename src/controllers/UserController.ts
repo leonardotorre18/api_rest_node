@@ -12,7 +12,7 @@ export default class Controller {
       password.length >= 8
     ) {
       login(email, password)
-        .then((user: IUser) => res.status(200).json(user))
+        .then((user: IUser) => res.status(200).json({ user }))
         .catch(() => res.status(403).json({ error: 'Forbidden' }))
     } else res.status(403).json({ error: 'Forbidden' })
   }
@@ -38,8 +38,8 @@ export default class Controller {
       name !== undefined && name.length >= 3
     ) {
       register(name, email, password)
-        .then((user: IUser) => res.status(201).json(user))
-        .catch(() => res.status(403).json({ error: 'Forbidden' }))
+        .then((user: IUser) => res.status(201).json({ user }))
+        .catch((err) => res.status(403).json({ err }))
     } else res.status(403).json({ error: 'Forbidden' })
   }
 
@@ -55,7 +55,7 @@ export default class Controller {
 
     if (id != null && token != null) {
       deleteUser(id, token)
-        .then((user: IUser) => res.status(200).json(user))
+        .then((user: IUser) => res.status(200).json({ user }))
         .catch(() => res.status(403).json({}))
     } else res.status(403).json({})
   }

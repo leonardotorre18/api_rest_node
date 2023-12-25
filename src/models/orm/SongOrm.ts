@@ -1,15 +1,15 @@
 import { MusicEntity } from '../entities/MusicEntity'
-import { type Music } from '../interfaces/Music'
+import { type ISong } from '../interfaces/ISong'
 
-export const getSongs = async (): Promise<Music[]> => {
+export const getSongs = async (): Promise<ISong[]> => {
   const response = await MusicEntity()
     .find()
     .exec()
-    .then((res: Music[]) => res)
+    .then((res: ISong[]) => res)
   return response
 }
 
-export const createSong = async (music: Music): Promise<Music> => {
+export const createSong = async (music: ISong): Promise<ISong> => {
   const response = await MusicEntity()
     .create(music)
     .then((res) => res)
