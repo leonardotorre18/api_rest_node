@@ -48,7 +48,7 @@ export const getPosts = async (limit?: number, page?: number): Promise<IPost[]> 
 export const getPostById = async (id: string): Promise<IPost> => {
   const model = PostEntity()
 
-  const result = await model.findById(id)
+  const result = await model.findById(id).populate('user', 'name email')
 
   if (result == null) throw new Error('Id no valido')
 
