@@ -15,8 +15,12 @@ export const login = async (email: string, password: string): Promise<IUser> => 
   const result = await model.findOne({ email })
 
   if (result != null && bcrypt.compareSync(password, result.password)) {
-    const session = await model.findOneAndUpdate({ email }, { token: jwt.sign({ email }, SECRET_KEY_TOKEN) }, { new: true })
-    if (session == null) throw new Error()
+    const session = await model.findOneAndUpdate(
+      { email },
+      { token: jwt.sign({ email }, SECRET_KEY_TOKEN) },
+      { new: true, fields: 'name email token' }
+    )
+    if (session == null) throw new Error('Contraseña o Correo no válidos')
 
     return session
   }
@@ -35,15 +39,17 @@ export const register = async (name: string, email: string, password: string): P
   const result = await model.findOne({ email })
 
   if (result != null) throw new Error('Usuario registrado con ese correo')
+  // If user is prev login, only login without register
+  // if (result != null) return await login(email, password)
 
-  const register = await model.create({
+  await model.create({
     name,
     email,
     password: bcrypt.hashSync(password, 8),
     token: jwt.sign({ email }, SECRET_KEY_TOKEN)
   })
 
-  return register
+  return await login(email, password)
 }
 
 export const getUsers = async (): Promise<IUser[]> => {

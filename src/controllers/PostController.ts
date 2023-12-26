@@ -12,6 +12,7 @@ import { isValidObjectId } from 'mongoose'
 import { v2 as cloudinary } from 'cloudinary'
 import LoadImages from '../middlewares/LoadImages'
 import dotenv from 'dotenv'
+import fs from 'fs'
 dotenv.config()
 
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME ?? ''
@@ -78,7 +79,11 @@ export class PostController {
                   id: imgLoad.public_id
                 }
               }, token)
-                .then((post: IPost) => res.status(201).json({ post }))
+                .then((post: IPost) => {
+                  res.status(201).json({ post })
+                  // Delete temporal image after save
+                  fs.unlinkSync(image.path)
+                })
                 .catch(() => res.status(403).json({}))
             })
             .catch((err) => res.status(403).json({ err }))

@@ -11,10 +11,10 @@ export default class Controller {
       email.length >= 10 &&
       password.length >= 8
     ) {
-      login(email, password)
+      login(email.toLowerCase(), password)
         .then((user: IUser) => res.status(200).json({ user }))
-        .catch(() => res.status(403).json({ error: 'Forbidden' }))
-    } else res.status(403).json({ error: 'Forbidden' })
+        .catch((err) => res.status(403).json({ err }))
+    } else res.status(403).json({ err: 'Contraseña y/o correo incorrectos' })
   }
 
   public logout (req: Request, res: Response): void {
@@ -23,8 +23,8 @@ export default class Controller {
     if (token !== undefined) {
       logout(token)
         .then((token: string) => res.status(200).json(token))
-        .catch(() => res.status(400).json({}))
-    } else res.status(400).json({})
+        .catch((err) => res.status(400).json({ err }))
+    } else res.status(400).json({ err: 'Token inválido' })
   }
 
   public register (req: Request, res: Response): void {
@@ -37,10 +37,10 @@ export default class Controller {
       password !== undefined && password.length >= 8 &&
       name !== undefined && name.length >= 3
     ) {
-      register(name, email, password)
+      register(name, email.toLowerCase(), password)
         .then((user: IUser) => res.status(201).json({ user }))
         .catch((err) => res.status(403).json({ err }))
-    } else res.status(403).json({ error: 'Forbidden' })
+    } else res.status(403).json({ err: 'Datos no válidos' })
   }
 
   public getUsers (req: Request, res: Response): void {
