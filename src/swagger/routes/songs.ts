@@ -1,7 +1,7 @@
 export default {
-  '/music': {
+  '/songs': {
     get: {
-      tags: ['Music'],
+      tags: ['Songs'],
       summary: 'Devuelve la lista de las canciones',
       responses: {
         200: {
@@ -11,7 +11,7 @@ export default {
               schema: {
                 type: 'array',
                 items: {
-                  $ref: '#/components/schemas/Music'
+                  $ref: '#/components/schemas/Song'
                 }
               }
             }

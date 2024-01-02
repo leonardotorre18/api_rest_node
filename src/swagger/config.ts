@@ -1,7 +1,9 @@
-import musicRoutes from './routes/music'
-// import socialRoutes from './routes/social'
-import musicSchema from './schemas/music'
-// import userSchema from './schemas/user'
+import songsRoutes from './routes/songs'
+import usersRoutes from './routes/users'
+import postsRoutes from './routes/posts'
+import songsSchema from './schemas/songs'
+import usersSchema from './schemas/users'
+import postsSchema from './schemas/posts'
 
 import dotenv from 'dotenv'
 
@@ -24,14 +26,16 @@ export default {
       }
     ],
     tags: [
-      { name: 'Music', description: 'Simulación de un reproductor de música' }
-      // { name: 'Social', description: 'Simulación de una Red Social' },
+      { name: 'Songs', description: 'Endpoints de un reproductor de música' },
+      { name: 'Users', description: 'Endpoints para registo y sesión de usuarios' },
+      { name: 'Posts', description: 'Endpoints para posts generados por usuarios' }
       // { name: 'Movies', description: 'Sumulación de una página de cines' }
     ],
     components: {
       schemas: {
-        ...musicSchema
-        // ...userSchema
+        ...songsSchema,
+        ...usersSchema,
+        ...postsSchema
       },
       securitySchemes: {
         BearerAuth: {
@@ -42,22 +46,13 @@ export default {
       }
     },
     paths: {
-      ...musicRoutes
-      // ...socialRoutes
+      ...songsRoutes,
+      ...usersRoutes,
+      ...postsRoutes
     }
   },
   apis: ['./src/routes/*.ts']
 }
-
-// /**
-//  * @swagger
-//  * components:
-//  *  securityScheme:
-//  *    bearerAuh:
-//  *      type: http
-//  *      scheme: bearer
-//  *      bearerFormat: JWT
-//  */
 
 //  *    headers:
 //  *      - name: Authorization

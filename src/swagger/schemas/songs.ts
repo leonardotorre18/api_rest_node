@@ -1,5 +1,5 @@
 export default {
-  Music: {
+  Song: {
     type: 'object',
     properties: {
       _id: {
