@@ -9,7 +9,7 @@
     "dev": "nodemon src/index.ts",
     "build": "webpack",
     "preview": "node dist/main.js",
-    "test": "jest --watch --detectOpenHandles"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
