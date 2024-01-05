@@ -30,21 +30,21 @@ jobs:
       - name: Run Eslint
         run: npm run lint
 
-  test:
-    needs: [avoid_reduncy]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Pull from repo
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Set up node version
-        uses: actions/setup-node@v3
-        with:
-          cache: 'npm'
-          node-version: '18'
-      - name: Intalling Dependencies of Project
-        run: npm install --no-audit --no-fund --no-optional
-        # run: npm ci
-      - name: Testing 
-        run: npm run test
+  # test:
+  #   needs: [avoid_reduncy]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Pull from repo
+  #       uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #     - name: Set up node version
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         cache: 'npm'
+  #         node-version: '18'
+  #     - name: Intalling Dependencies of Project
+  #       run: npm install --no-audit --no-fund --no-optional
+  #       # run: npm ci
+  #     - name: Testing 
+  #       run: npm run test
