@@ -1,0 +1,26 @@
+version: 'v1.0.0'
+
+services:
+  api_rest_node:
+    container_name: api_rest_node
+    build: .
+    links:
+      - api_rest_node__db
+    ports:
+      - ${PORT}:${PORT}
+
+  api_rest_node__db:
+    container_name: antojitos_db
+    image: mongo:4
+    attach: false
+    ports:
+      - 27017:27017
+    volumes:
+      - api_rest_node:/data/db
+
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+
+volumes:
+  api_rest_node:

@@ -18,8 +18,9 @@ mongoose.connect(process.env.DATABASE_URL ?? '')
   .then(() => {
     console.log('Database is connect...')
   })
-  .catch(() => {
+  .catch((err) => {
     console.log('Database connection Error')
+    console.log(err)
   })
 
 app.use(cors())

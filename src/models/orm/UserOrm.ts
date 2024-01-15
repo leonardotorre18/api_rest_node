@@ -2,7 +2,7 @@
 import { isValidObjectId, type Model } from 'mongoose'
 import { UserEntity } from '../entities/UserEntity'
 import { type IUser } from '../interfaces/IUser'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 dotenv.config()
