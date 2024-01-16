@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint src/",
-    "start": "node src/index.ts",
+    "start": "npm run build && node dist/main.js",
     "dev": "nodemon src/index.ts",
     "build": "webpack",
     "preview": "node dist/main.js",
