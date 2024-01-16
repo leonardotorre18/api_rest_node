@@ -4,10 +4,14 @@ import { type IUser } from '../models/interfaces/IUser'
 
 export default class Controller {
   public login (req: Request, res: Response): void {
-    const email: string = req?.body?.email.toLowerCase()
+    const email: string = req?.body?.email?.toLowerCase()
     const password: string = req?.body?.password
 
     if (
+      email != null &&
+      email !== undefined &&
+      password != null &&
+      password !== undefined &&
       email.length >= 10 &&
       password.length >= 8
     ) {
@@ -20,7 +24,7 @@ export default class Controller {
   public logout (req: Request, res: Response): void {
     const token = req?.headers?.authorization
 
-    if (token !== undefined) {
+    if (token !== undefined && token != null) {
       logout(token)
         .then((token: string) => res.status(200).json(token))
         .catch((err) => res.status(400).json({ err }))
@@ -28,13 +32,13 @@ export default class Controller {
   }
 
   public register (req: Request, res: Response): void {
-    const email: string = req?.body?.email.toLowerCase()
+    const email: string = req?.body?.email?.toLowerCase()
     const password: string = req?.body?.password
     const name: string = req?.body?.name
 
     if (
-      email !== undefined && email.length >= 10 &&
-      password !== undefined && password.length >= 8 &&
+      email !== undefined && email != null && email.length >= 10 &&
+      password !== undefined && password != null && password.length >= 8 &&
       name !== undefined && name.length >= 3
     ) {
       register(name, email.toLowerCase(), password)
@@ -45,7 +49,7 @@ export default class Controller {
 
   public getUsers (req: Request, res: Response): void {
     getUsers()
-      .then((users: IUser[]) => res.status(200).json(users))
+      .then((users: IUser[]) => res.status(200).json({ users }))
       .catch(() => res.status(403).json({}))
   }
 
@@ -53,7 +57,7 @@ export default class Controller {
     const id = req?.params?.id
     const token = req?.headers?.authorization
 
-    if (id != null && token != null) {
+    if (id != null && id !== undefined && token != null && token !== undefined) {
       deleteUser(id, token)
         .then((user: IUser) => res.status(200).json({ user }))
         .catch(() => res.status(403).json({}))
@@ -63,7 +67,7 @@ export default class Controller {
   public getUserById (req: Request, res: Response): void {
     const id = req?.params?.id
 
-    if (id != null) {
+    if (id != null && id !== undefined) {
       getUserById(id)
         .then((user: IUser) => res.status(200).json(user))
         .catch(() => res.status(403).json({}))
@@ -73,7 +77,7 @@ export default class Controller {
   public getUserByToken (req: Request, res: Response): void {
     const token = req?.headers?.authorization
 
-    if (token !== undefined) {
+    if (token !== undefined && token != null) {
       getUserByToken(token)
         .then((user: IUser) => res.status(200).json(user))
         .catch(() => res.status(400).json({}))

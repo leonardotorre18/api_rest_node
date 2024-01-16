@@ -29,8 +29,8 @@ export class PostController {
   public getPost (req: Request, res: Response): void {
     const { limit, page } = req.query
     if (
-      limit !== undefined && typeof limit !== 'object' &&
-      page !== undefined && typeof page !== 'object'
+      limit !== undefined && limit != null && typeof limit !== 'object' &&
+      page !== undefined && page != null && typeof page !== 'object'
     ) {
       getPosts(parseInt(limit.toString()), parseInt(page.toString()))
         .then((posts: IPost[]) => res.status(200).json({
@@ -62,11 +62,11 @@ export class PostController {
         const token: string | undefined = req?.headers?.authorization
 
         if (
-          title !== undefined && title.length >= 10 &&
-          body !== undefined && body.length >= 30 &&
-          image !== undefined &&
-          token !== undefined &&
-          image.path !== undefined
+          title !== undefined && title != null && title.length >= 10 &&
+          body !== undefined && body != null && body.length >= 30 &&
+          image !== undefined && image != null &&
+          token !== undefined && token != null &&
+          image.path !== undefined && image.path != null
         ) {
           cloudinary.uploader.upload(image.path)
             .then((imgLoad) => {
@@ -99,6 +99,7 @@ export class PostController {
 
     if (
       isValidObjectId(id) &&
+      token !== undefined &&
       token !== undefined
     ) {
       deletePost(id, token)
@@ -147,9 +148,9 @@ export class PostController {
 
         console.log(id)
 
-        if (id !== undefined && token !== undefined) {
+        if (id !== undefined && id != null && token !== undefined && token != null) {
           // Condicional for update image or not
-          if (image !== undefined) {
+          if (image !== undefined && image != null) {
             // Delete old image if exist new image
             getPostById(id)
               .then((post: IPost) => {

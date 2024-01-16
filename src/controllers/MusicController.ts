@@ -3,9 +3,9 @@ import { getSongs } from '../models/orm/SongOrm'
 import { type ISong } from '../models/interfaces/ISong'
 
 class Controller {
-  public getSongsV2 (req: Request, res: Response): void {
+  public getSongs (req: Request, res: Response): void {
     getSongs()
-      .then((songs: ISong[]) => res.status(200).json({ songs }))
+      .then((songs: ISong[]) => res.status(200).json(songs))
       .catch(() => res.status(500))
   }
 }
