@@ -1,6 +1,6 @@
 import { type IPost } from '../../models/interfaces/IPost'
 import { type IUser } from '../../models/interfaces/IUser'
-import { type Music } from '../../models/interfaces/ISong'
+import { type ISong } from '../../models/interfaces/ISong'
 
 export interface TUsersResponse {
   status: 200
@@ -87,18 +87,18 @@ export const internalServerErrorResponse = (): T500Response => ({
 
 export interface IMusicResponse200 {
   status: 200
-  songs: Music[]
+  songs: ISong[]
 }
-export const MusicResponse200 = (music: Music[]): IMusicResponse200 => ({
+export const MusicResponse200 = (music: ISong[]): IMusicResponse200 => ({
   status: 200,
   songs: music
 })
 
 export interface IMusicAddResponse200 {
   status: 200
-  songs: Music
+  songs: ISong
 }
-export const MusicAddResponse200 = (music: Music): IMusicAddResponse200 => ({
+export const MusicAddResponse200 = (music: ISong): IMusicAddResponse200 => ({
   status: 200,
   songs: music
 })
